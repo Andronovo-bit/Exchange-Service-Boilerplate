@@ -10,6 +10,8 @@ const {
   DB_PASS,
   DB_HOST,
   DB_PORT,
+  DB_SSL,
+  DB_LOGGING,
 } = process.env;
 
 if (!DB_NAME || !DB_USER || !DB_PASS || !DB_HOST || !DB_PORT) {
@@ -19,11 +21,14 @@ if (!DB_NAME || !DB_USER || !DB_PASS || !DB_HOST || !DB_PORT) {
 const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
   host: DB_HOST,
   port: parseInt(DB_PORT, 10),
-  dialect: 'postgres', // Change this to your database provider if different - e.g. 'mysql, 'sqlite', etc.
-  ssl: process.env.DB_SSL === 'true', // Use environment variable to control SSL default
+  dialect: 'postgres', // Change this to your database provider if different - e.g. 'mysql', 'sqlite', etc.
+  logging: DB_LOGGING === 'true', // Use environment variable to control logging
+  dialectOptions: {
+    ssl: DB_SSL === 'true', // Use environment variable to control SSL
+  },
 });
 
-export const connectDatabase = async (): Promise<void> => {
+const connectDatabase = async (): Promise<void> => {
   try {
     await sequelize.authenticate();
     console.log('Successfully connected to the database.');
@@ -35,4 +40,4 @@ export const connectDatabase = async (): Promise<void> => {
   }
 };
 
-export default sequelize;
+export { sequelize, connectDatabase };

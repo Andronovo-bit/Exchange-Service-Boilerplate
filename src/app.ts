@@ -1,16 +1,17 @@
 import express, { Application } from 'express';
 import dotenv from 'dotenv';
-import sequelize from './config/database'; 
+import {connectDatabase} from './config/database'; 
 
 dotenv.config();
 const app: Application = express();
 
 app.use(express.json()); // JSON body parser
 
-sequelize
-  .authenticate()
-  .then(() => console.log('Veritabanına başarıyla bağlanıldı...'))
-  .catch((err: Error) => console.log('Veritabanı bağlantı hatası: ' + err.stack));
+connectDatabase().then(() => {
+  console.log('Database connected');
+}).catch((error) => {
+  console.error('Database connection error:', error);
+});
 
 // Basit bir başlangıç rotası
 app.get('/', (req, res) => {
