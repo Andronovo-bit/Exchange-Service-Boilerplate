@@ -1,10 +1,11 @@
 {
   "name": "exchange-service-boilerplate",
   "version": "1.0.0",
-  "main": "dist/index.js",
+  "main": "dist/app.js",
   "scripts": {
     "test": "jest --coverage",
-    "dev": "nodemon src/index.ts",
+    "start": "ts-node ./app.ts",
+    "dev": "nodemon",
     "build": "npx tsc"
   },
   "keywords": [],
