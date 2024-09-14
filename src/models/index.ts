@@ -1,12 +1,12 @@
 // index.ts veya models.ts gibi bir dosyada
 
 import User from './User';
-import Portfolio from './Portfolio';
-import Share from './Share';
-import Trade from './Trade';
-import PortfolioHoldings from './PortfolioHoldings';
+import Portfolio from './portfolio/Portfolio';
+import Share from './share/Share';
+import Trade from './trade/model';
+import PortfolioHoldings from './portfolio/PortfolioHoldings';
 import Transaction from './Transaction';
-import SharePrice from './SharePrice';
+import SharePrice from './share/SharePrice';
 
 // Relationships between User and Portfolio
 User.hasOne(Portfolio, { foreignKey: 'user_id' });

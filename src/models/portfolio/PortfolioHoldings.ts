@@ -1,5 +1,5 @@
 import { Model, DataTypes, Optional } from 'sequelize';
-import { sequelize } from '../config/db/database';
+import { sequelize } from '../../config/database/database';
 import Portfolio from './Portfolio';
 import Share from './Share';
 
@@ -14,10 +14,13 @@ interface PortfolioHoldingsAttributes {
 }
 
 // Define the creation attributes for the PortfolioHoldings model
-type PortfolioHoldingsCreationAttributes = Optional<PortfolioHoldingsAttributes, 'holding_id'>
+type PortfolioHoldingsCreationAttributes = Optional<PortfolioHoldingsAttributes, 'holding_id'>;
 
 // Define the PortfolioHoldings model class
-class PortfolioHoldings extends Model<PortfolioHoldingsAttributes, PortfolioHoldingsCreationAttributes> implements PortfolioHoldingsAttributes {
+class PortfolioHoldings
+  extends Model<PortfolioHoldingsAttributes, PortfolioHoldingsCreationAttributes>
+  implements PortfolioHoldingsAttributes
+{
   public holding_id!: number;
   public portfolio_id!: number;
   public share_id!: number;
@@ -25,7 +28,7 @@ class PortfolioHoldings extends Model<PortfolioHoldingsAttributes, PortfolioHold
   public average_price!: number;
   public total_value!: number;
 
-  // Timestamps
+  // Timestamps (automatically managed by Sequelize)
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -77,10 +80,15 @@ PortfolioHoldings.init(
     },
   },
   {
-    sequelize: sequelize,
+    sequelize,
     tableName: 'portfolio_holdings',
-    timestamps: true, // Enable timestamps
+    timestamps: true, // Enable automatic timestamps
   },
 );
 
+// Export the model
 export default PortfolioHoldings;
+
+// Define associations outside the model
+PortfolioHoldings.belongsTo(Portfolio, { foreignKey: 'portfolio_id' });
+PortfolioHoldings.belongsTo(Share, { foreignKey: 'share_id' });

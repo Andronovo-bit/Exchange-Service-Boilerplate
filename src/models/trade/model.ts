@@ -1,7 +1,7 @@
 import { Model, DataTypes, Optional } from 'sequelize';
-import { sequelize } from '../config/db/database';
-import Portfolio from './Portfolio';
-import Share from './Share';
+import { sequelize } from '../../config/database/database';
+import Portfolio from '../portfolio/Portfolio';
+import Share from '../share/Share';
 
 // Define the attributes for the Trade model
 interface TradeAttributes {

@@ -1,5 +1,5 @@
 import { Model, DataTypes, Optional } from 'sequelize';
-import { sequelize } from '../config/db/database';
+import { sequelize } from '../../config/database/database';
 import Share from './Share';
 
 // Define the attributes for the SharePrice model
