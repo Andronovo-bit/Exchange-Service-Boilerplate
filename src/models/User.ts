@@ -1,5 +1,6 @@
+// src/models/User.ts
 import { DataTypes, Model, Optional } from 'sequelize';
-import sequelize from '../config/database';
+import sequelize from '../config/db/sequelizeInstance'; // Updated import
 
 // Define the attributes for the User model
 interface UserAttributes {
@@ -33,21 +34,21 @@ User.init(
       primaryKey: true,
     },
     name: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(127),
       allowNull: false,
     },
     email: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(255),
       allowNull: false,
       unique: true,
     },
     password: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(255),
       allowNull: false,
     },
   },
   {
-    sequelize,
+    sequelize, // Directly use the imported sequelize instance
     tableName: 'users',
     timestamps: true, // Enable timestamps
   },

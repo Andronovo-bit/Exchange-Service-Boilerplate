@@ -1,17 +1,13 @@
 import express, { Application } from 'express';
 import dotenv from 'dotenv';
-import {connectDatabase} from './config/database'; 
+import initialize from './config/db/initDatabase';
 
 dotenv.config();
 const app: Application = express();
 
 app.use(express.json()); // JSON body parser
 
-connectDatabase().then(() => {
-  console.log('Database connected');
-}).catch((error) => {
-  console.error('Database connection error:', error);
-});
+initialize(); // Initialize the database connection and models
 
 // Basit bir başlangıç rotası
 app.get('/', (req, res) => {
