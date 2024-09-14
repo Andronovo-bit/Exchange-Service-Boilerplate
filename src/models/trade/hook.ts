@@ -1,5 +1,5 @@
-import PortfolioHolding from '../portfolio/PortfolioHoldings';
-import Trade from './model';
+import PortfolioHolding from '../../models/portfolio/PortfolioHoldings';
+import Trade from './Trade';
 
 async function getLatestPrice(share_id: number): Promise<number> {
   // Implement fetching the latest price from the `shares` table or any external API

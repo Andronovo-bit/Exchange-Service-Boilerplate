@@ -1,24 +1,49 @@
-// src/config/sequelizeInstance.ts
-import { Sequelize } from 'sequelize';
-import dotenv from 'dotenv';
+import { Dialect, Sequelize } from 'sequelize';
 
-dotenv.config(); // Load environment variables from .env file
+/**
+ * The Singleton class defines the `getInstance` method that lets clients access
+ * the unique singleton instance.
+ */
+export class SequelizeConnection {
+  // Connection instance
+  private static instance: Sequelize;
 
-const { DB_NAME, DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_SSL, DB_LOGGING } = process.env;
+  /**
+   * The Singleton's constructor should always be private to prevent direct
+   * construction calls with the `new` operator.
+   */
+  private constructor() {
+    // Information needed to initialize database connection
+    const dbName = process.env.DB_NAME as string;
+    const dbUser = process.env.DB_USER as string;
+    const dbHost = process.env.DB_HOST;
+    const dbDriver = process.env.DB_DRIVER as Dialect;
+    const dbPassword = process.env.DB_PASS;
+    const dbPort = process.env.DB_PORT;
 
-if (!DB_NAME || !DB_USER || !DB_PASS || !DB_HOST || !DB_PORT) {
-  throw new Error('Missing required environment variables for database connection');
+    // Initialize connection
+    SequelizeConnection.instance = new Sequelize(dbName, dbUser, dbPassword, {
+      host: dbHost,
+      dialect: dbDriver,
+      port: parseInt(dbPort as string),
+      logging: false,
+    });
+
+    // Test connection
+    SequelizeConnection.instance.authenticate().then(() => {
+      console.log('Sequelize connected');
+    });
+  }
+
+  /**
+   * The static method that controls the access to the singleton instance.
+   *
+   */
+  public static getInstance(): Sequelize {
+    if (!SequelizeConnection.instance) {
+      new SequelizeConnection();
+    }
+
+    return SequelizeConnection.instance;
+  }
 }
-
-const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
-  host: DB_HOST,
-  port: parseInt(DB_PORT, 10),
-  dialect: 'postgres',
-  logging: DB_LOGGING === 'true',
-  dialectOptions: {
-    ssl: DB_SSL === 'true',
-  },
-});
-
-
-export default sequelize;

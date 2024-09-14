@@ -1,5 +1,5 @@
 import { Model, DataTypes, Optional } from 'sequelize';
-import { sequelize } from '../../config/database/database';
+import { SequelizeConnection } from '../../database';
 import Share from './Share';
 
 // Define the attributes for the SharePrice model
@@ -11,7 +11,9 @@ interface SharePriceAttributes {
 }
 
 // Define the creation attributes for the SharePrice model
-type SharePriceCreationAttributes = Optional<SharePriceAttributes, 'price_id' | 'recorded_at'>
+type SharePriceCreationAttributes = Optional<SharePriceAttributes, 'price_id' | 'recorded_at'>;
+
+const sequelizeConnection = SequelizeConnection.getInstance();
 
 // Define the SharePrice model class
 class SharePrice extends Model<SharePriceAttributes, SharePriceCreationAttributes> implements SharePriceAttributes {
@@ -54,7 +56,7 @@ SharePrice.init(
     },
   },
   {
-    sequelize: sequelize,
+    sequelize: sequelizeConnection,
     tableName: 'share_prices',
     timestamps: true, // Enable timestamps
   },

@@ -1,7 +1,7 @@
 import { Model, DataTypes, Optional } from 'sequelize';
-import { sequelize } from '../../config/database/database';
+import { SequelizeConnection } from '../../database';
 import Portfolio from './Portfolio';
-import Share from './Share';
+import Share from '../share/Share';
 
 // Define the attributes for the PortfolioHoldings model
 interface PortfolioHoldingsAttributes {
@@ -32,6 +32,7 @@ class PortfolioHoldings
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
+const sequelizeConnection = SequelizeConnection.getInstance();
 
 // Initialize the PortfolioHoldings model
 PortfolioHoldings.init(
@@ -80,7 +81,7 @@ PortfolioHoldings.init(
     },
   },
   {
-    sequelize,
+    sequelize: sequelizeConnection,
     tableName: 'portfolio_holdings',
     timestamps: true, // Enable automatic timestamps
   },

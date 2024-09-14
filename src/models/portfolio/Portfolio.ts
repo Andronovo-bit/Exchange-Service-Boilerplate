@@ -1,6 +1,6 @@
 import { Model, DataTypes, Optional } from 'sequelize';
-import { sequelize } from '../config/db/database';
-import User from './User';
+import { SequelizeConnection } from '../../database';
+import User from '../user/User';
 
 // Define the attributes for the Portfolio model
 interface PortfolioAttributes {
@@ -10,6 +10,9 @@ interface PortfolioAttributes {
 
 // Define the creation attributes for the Portfolio model
 type PortfolioCreationAttributes = Optional<PortfolioAttributes, 'portfolio_id'>
+
+const sequelizeConnection = SequelizeConnection.getInstance();
+
 
 // Define the Portfolio model class
 class Portfolio extends Model<PortfolioAttributes, PortfolioCreationAttributes> implements PortfolioAttributes {
@@ -40,7 +43,7 @@ Portfolio.init(
     },
   },
   {
-    sequelize: sequelize,
+    sequelize: sequelizeConnection,
     tableName: 'portfolios',
     timestamps: true, // Enable timestamps
   },

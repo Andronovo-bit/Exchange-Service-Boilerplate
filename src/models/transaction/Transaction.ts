@@ -1,6 +1,6 @@
 import { Model, DataTypes, Optional } from 'sequelize';
-import { sequelize } from '../config/database/database';
-import User from './User';
+import { SequelizeConnection } from '../../database';
+import User from '../user/User';
 
 // Define the attributes for the Transaction model
 interface TransactionAttributes {
@@ -14,6 +14,9 @@ interface TransactionAttributes {
 
 // Define the creation attributes for the Transaction model
 type TransactionCreationAttributes = Optional<TransactionAttributes, 'transaction_id' | 'transaction_date'>
+
+const sequelizeConnection = SequelizeConnection.getInstance();
+
 
 // Define the Transaction model class
 class Transaction extends Model<TransactionAttributes, TransactionCreationAttributes> implements TransactionAttributes {
@@ -65,7 +68,7 @@ Transaction.init(
     },
   },
   {
-    sequelize: sequelize,
+    sequelize: sequelizeConnection,
     tableName: 'transactions',
     timestamps: true, // Enable timestamps
   },

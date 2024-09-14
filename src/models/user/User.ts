@@ -1,6 +1,6 @@
 // src/models/User.ts
 import { DataTypes, Model, Optional } from 'sequelize';
-import sequelize from '../config/database/sequelizeInstance'; // Updated import
+import {SequelizeConnection} from '../../config/database/sequelizeInstance'; // Updated import
 
 // Define the attributes for the User model
 interface UserAttributes {
@@ -12,6 +12,9 @@ interface UserAttributes {
 
 // Define the creation attributes for the User model
 type UserCreationAttributes = Optional<UserAttributes, 'id'>;
+
+const sequelizeConnection = SequelizeConnection.getInstance();
+
 
 // Define the User model class
 export class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
@@ -48,7 +51,7 @@ User.init(
     },
   },
   {
-    sequelize, // Directly use the imported sequelize instance
+    sequelize: sequelizeConnection, // Directly use the imported sequelize instance
     tableName: 'users',
     timestamps: true, // Enable timestamps
   },

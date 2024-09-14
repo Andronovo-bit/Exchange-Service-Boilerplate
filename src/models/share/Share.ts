@@ -1,5 +1,5 @@
 import { Model, DataTypes, Optional } from 'sequelize';
-import { sequelize } from '../config/db/database';
+import { SequelizeConnection } from '../../database';
 
 // Define the attributes for the Share model
 interface ShareAttributes {
@@ -10,7 +10,9 @@ interface ShareAttributes {
 }
 
 // Define the creation attributes for the Share model
-type ShareCreationAttributes = Optional<ShareAttributes, 'share_id'>
+type ShareCreationAttributes = Optional<ShareAttributes, 'share_id'>;
+
+const sequelizeConnection = SequelizeConnection.getInstance();
 
 // Define the Share model class
 class Share extends Model<ShareAttributes, ShareCreationAttributes> implements ShareAttributes {
@@ -50,7 +52,7 @@ Share.init(
     },
   },
   {
-    sequelize: sequelize,
+    sequelize: sequelizeConnection,
     tableName: 'shares',
     timestamps: true, // Enable timestamps
   },

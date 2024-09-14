@@ -1,5 +1,5 @@
 // src/initDatabase.ts
-import { connectDatabase } from './database';
+import { connectDatabase } from '../../database';
 import dbInit from './dbInit';
 
 // Function to initialize the database connection and models

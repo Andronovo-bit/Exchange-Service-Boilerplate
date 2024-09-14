@@ -1,10 +1,11 @@
 import { Model, ModelStatic } from 'sequelize';
 import syncOrderedModels from '../../models';
-import sequelize from './sequelizeInstance';
+import {SequelizeConnection} from './sequelizeInstance';
 
 // Define a type for the models
 type SequelizeModels = { [key: string]: ModelStatic<Model> };
-//change order of models
+
+const sequelizeConnection = SequelizeConnection.getInstance();
 
 // Function to initialize the database
 const dbInit = async (): Promise<void> => {
@@ -22,7 +23,7 @@ const dbInit = async (): Promise<void> => {
       await model.sync({ force: true });
     }
 
-    await sequelize.sync({ force: true }); // Synchronize all models at once
+    await sequelizeConnection.sync({ force: true }); // Synchronize all models at once
     console.log('Database initialized successfully.');
   } catch (error) {
     console.error('Failed to initialize the database:', error);

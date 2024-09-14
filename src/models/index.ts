@@ -1,11 +1,11 @@
 // index.ts veya models.ts gibi bir dosyada
 
-import User from './User';
+import User from './user/User';
 import Portfolio from './portfolio/Portfolio';
 import Share from './share/Share';
-import Trade from './trade/model';
+import Trade from './trade/Trade';
 import PortfolioHoldings from './portfolio/PortfolioHoldings';
-import Transaction from './Transaction';
+import Transaction from './transaction/Transaction';
 import SharePrice from './share/SharePrice';
 
 // Relationships between User and Portfolio

@@ -1,5 +1,5 @@
 import { Model, DataTypes, Optional } from 'sequelize';
-import { sequelize } from '../../config/database/database';
+import { SequelizeConnection } from '../../database';
 import Portfolio from '../portfolio/Portfolio';
 import Share from '../share/Share';
 
@@ -16,6 +16,9 @@ interface TradeAttributes {
 
 // Define the creation attributes for the Trade model
 type TradeCreationAttributes = Optional<TradeAttributes, 'trade_id' | 'trade_date'>
+
+const sequelizeConnection = SequelizeConnection.getInstance();
+
 
 // Define the Trade model class
 class Trade extends Model<TradeAttributes, TradeCreationAttributes> implements TradeAttributes {
@@ -80,7 +83,7 @@ Trade.init(
     },
   },
   {
-    sequelize: sequelize,
+    sequelize: sequelizeConnection,
     tableName: 'trades',
     timestamps: true, // Enable timestamps
   },
