@@ -1,6 +1,5 @@
 // src/database/initModels.ts
 import sequelize from './sequelize';
-import config from '../config';
 import syncOrderedModels from '../../models';
 import { Model, ModelStatic } from 'sequelize';
 
