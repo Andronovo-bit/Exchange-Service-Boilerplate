@@ -1,5 +1,8 @@
 import { Model, DataTypes, Optional } from 'sequelize';
 import { SequelizeConnection } from '../../database';
+import Trade from '../trade/Trade';
+import PortfolioHoldings from '../portfolio/PortfolioHoldings';
+import SharePrice from './SharePrice';
 
 // Define the attributes for the Share model
 interface ShareAttributes {
@@ -12,8 +15,6 @@ interface ShareAttributes {
 // Define the creation attributes for the Share model
 type ShareCreationAttributes = Optional<ShareAttributes, 'share_id'>;
 
-const sequelizeConnection = SequelizeConnection.getInstance();
-
 // Define the Share model class
 class Share extends Model<ShareAttributes, ShareCreationAttributes> implements ShareAttributes {
   public share_id!: number;
@@ -24,7 +25,16 @@ class Share extends Model<ShareAttributes, ShareCreationAttributes> implements S
   // Timestamps
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
+
+  // Associations
+  public static associate(): void {
+    // Define associations here if needed
+    Share.hasMany(Trade, { foreignKey: 'share_id' });
+    Share.hasMany(PortfolioHoldings, { foreignKey: 'share_id' });
+    Share.hasMany(SharePrice, { foreignKey: 'share_id' });
+  }
 }
+const sequelizeConnection = SequelizeConnection.getInstance();
 
 // Initialize the Share model
 Share.init(

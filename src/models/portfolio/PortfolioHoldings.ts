@@ -5,7 +5,6 @@ import Share from '../share/Share';
 
 // Define the attributes for the PortfolioHoldings model
 interface PortfolioHoldingsAttributes {
-  holding_id: number;
   portfolio_id: number;
   share_id: number;
   quantity: number;
@@ -14,14 +13,16 @@ interface PortfolioHoldingsAttributes {
 }
 
 // Define the creation attributes for the PortfolioHoldings model
-type PortfolioHoldingsCreationAttributes = Optional<PortfolioHoldingsAttributes, 'holding_id'>;
+type PortfolioHoldingsCreationAttributes = Optional<
+  PortfolioHoldingsAttributes,
+  'quantity' | 'average_price' | 'total_value'
+>;
 
 // Define the PortfolioHoldings model class
 class PortfolioHoldings
   extends Model<PortfolioHoldingsAttributes, PortfolioHoldingsCreationAttributes>
   implements PortfolioHoldingsAttributes
 {
-  public holding_id!: number;
   public portfolio_id!: number;
   public share_id!: number;
   public quantity!: number;
@@ -31,20 +32,23 @@ class PortfolioHoldings
   // Timestamps (automatically managed by Sequelize)
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
+
+  // Associations
+  public static associate(): void {
+    // Define associations here if needed
+    PortfolioHoldings.belongsTo(Portfolio, { foreignKey: 'portfolio_id' });
+    PortfolioHoldings.belongsTo(Share, { foreignKey: 'share_id' });
+  }
 }
 const sequelizeConnection = SequelizeConnection.getInstance();
 
 // Initialize the PortfolioHoldings model
 PortfolioHoldings.init(
   {
-    holding_id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
     portfolio_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      primaryKey: true,
       references: {
         model: Portfolio,
         key: 'portfolio_id',
@@ -53,6 +57,7 @@ PortfolioHoldings.init(
     share_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      primaryKey: true,
       references: {
         model: Share,
         key: 'share_id',
@@ -66,17 +71,16 @@ PortfolioHoldings.init(
       },
     },
     average_price: {
-      type: DataTypes.DECIMAL(10, 2),
+      type: DataTypes.DECIMAL(15, 6),
       allowNull: false,
       validate: {
         min: 0,
       },
     },
     total_value: {
-      type: DataTypes.DECIMAL(12, 2),
-      allowNull: false,
-      validate: {
-        min: 0,
+      type: DataTypes.VIRTUAL(DataTypes.DECIMAL(20, 6), ['quantity', 'average_price']),
+      get() {
+        return this.getDataValue('quantity') * this.getDataValue('average_price');
       },
     },
   },
@@ -84,12 +88,24 @@ PortfolioHoldings.init(
     sequelize: sequelizeConnection,
     tableName: 'portfolio_holdings',
     timestamps: true, // Enable automatic timestamps
+    indexes: [
+      {
+        unique: false,
+        fields: ['portfolio_id'],
+      },
+      {
+        unique: false,
+        fields: ['share_id'],
+      },
+      {
+        unique: true,
+        fields: ['portfolio_id', 'share_id'],
+      },
+    ],
   },
 );
 
 // Export the model
 export default PortfolioHoldings;
 
-// Define associations outside the model
-PortfolioHoldings.belongsTo(Portfolio, { foreignKey: 'portfolio_id' });
-PortfolioHoldings.belongsTo(Share, { foreignKey: 'share_id' });
+

@@ -15,10 +15,7 @@ interface TradeAttributes {
 }
 
 // Define the creation attributes for the Trade model
-type TradeCreationAttributes = Optional<TradeAttributes, 'trade_id' | 'trade_date'>
-
-const sequelizeConnection = SequelizeConnection.getInstance();
-
+type TradeCreationAttributes = Optional<TradeAttributes, 'trade_id' | 'trade_date'>;
 
 // Define the Trade model class
 class Trade extends Model<TradeAttributes, TradeCreationAttributes> implements TradeAttributes {
@@ -33,7 +30,16 @@ class Trade extends Model<TradeAttributes, TradeCreationAttributes> implements T
   // Timestamps
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
+
+  // Associations
+  public static associate(): void {
+    // Define associations here if needed
+    Trade.belongsTo(Portfolio, { foreignKey: 'portfolio_id' });
+    Trade.belongsTo(Share, { foreignKey: 'share_id' });
+  }
 }
+
+const sequelizeConnection = SequelizeConnection.getInstance();
 
 // Initialize the Trade model
 Trade.init(
@@ -71,7 +77,7 @@ Trade.init(
       },
     },
     price: {
-      type: DataTypes.DECIMAL(10, 2),
+      type: DataTypes.DECIMAL(15, 6),
       allowNull: false,
       validate: {
         min: 0,
@@ -80,6 +86,9 @@ Trade.init(
     trade_date: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
+      validate: {
+        isDate: true,
+      },
     },
   },
   {

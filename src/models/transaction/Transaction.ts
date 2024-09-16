@@ -13,10 +13,7 @@ interface TransactionAttributes {
 }
 
 // Define the creation attributes for the Transaction model
-type TransactionCreationAttributes = Optional<TransactionAttributes, 'transaction_id' | 'transaction_date'>
-
-const sequelizeConnection = SequelizeConnection.getInstance();
-
+type TransactionCreationAttributes = Optional<TransactionAttributes, 'transaction_id' | 'transaction_date'>;
 
 // Define the Transaction model class
 class Transaction extends Model<TransactionAttributes, TransactionCreationAttributes> implements TransactionAttributes {
@@ -30,7 +27,16 @@ class Transaction extends Model<TransactionAttributes, TransactionCreationAttrib
   // Timestamps
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
+
+  // Associations
+  public static associate(): void {
+    // Define associations here if needed
+    Transaction.belongsTo(User, { foreignKey: 'user_id' });
+  }
 }
+
+const sequelizeConnection = SequelizeConnection.getInstance();
+
 // Initialize the Transaction model
 Transaction.init(
   {
@@ -52,10 +58,10 @@ Transaction.init(
       allowNull: false,
     },
     amount: {
-      type: DataTypes.DECIMAL(10, 2),
+      type: DataTypes.DECIMAL(15, 2),
       allowNull: false,
       validate: {
-        min: 0,
+        min: 10,
       },
     },
     description: {

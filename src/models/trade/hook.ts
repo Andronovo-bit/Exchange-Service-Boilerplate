@@ -1,11 +1,18 @@
 import PortfolioHolding from '../../models/portfolio/PortfolioHoldings';
+import SharePrice from '../share/SharePrice';
 import Trade from './Trade';
 
 async function getLatestPrice(share_id: number): Promise<number> {
-  // Implement fetching the latest price from the `shares` table or any external API
-  // For now, let's assume a static value for the sake of simplicity
-  return 100.0; // This is just a placeholder; implement your own logic here.
+  const sharePrice = await SharePrice.findOne({
+    where: { share_id },
+    order: [['recorded_at', 'DESC']],
+  });
+  if (!sharePrice) {
+    throw new Error('Latest price not found for the share.');
+  }
+  return parseFloat(sharePrice.price.toString());
 }
+
 
 Trade.addHook('beforeCreate', async (trade: Trade, options: any) => {
   const { portfolio_id, share_id, quantity, price, trade_type } = trade;

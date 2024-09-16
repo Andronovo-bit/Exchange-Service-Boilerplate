@@ -327,7 +327,7 @@ module.exports = {
           share_id: shareRows.find((s) => s.symbol === 'APL').share_id,
           quantity: 30, // 50 bought - 20 sold
           average_price: (50 * 150.0 - 20 * 155.0) / 30, // Net cost divided by remaining quantity
-          total_value: 30 * 155.0, // Assuming current price is 155.0
+          //total_value: 30 * 155.0, // Assuming current price is 155.0
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -337,7 +337,7 @@ module.exports = {
           share_id: shareRows.find((s) => s.symbol === 'TSL').share_id,
           quantity: 10,
           average_price: 700.0,
-          total_value: 10 * 700.0,
+          //total_value: 10 * 700.0,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -347,7 +347,7 @@ module.exports = {
           share_id: shareRows.find((s) => s.symbol === 'GGL').share_id,
           quantity: 3, // 5 bought - 2 sold
           average_price: (5 * 2800.0 - 2 * 2850.0) / 3, // Net cost divided by remaining quantity
-          total_value: 3 * 2850.0,
+          //total_value: 3 * 2850.0,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -357,7 +357,7 @@ module.exports = {
           share_id: shareRows.find((s) => s.symbol === 'MST').share_id,
           quantity: 15,
           average_price: 290.0,
-          total_value: 15 * 290.0,
+          //total_value: 15 * 290.0,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -367,7 +367,7 @@ module.exports = {
           share_id: shareRows.find((s) => s.symbol === 'AZN').share_id,
           quantity: 2, // 3 bought - 1 sold
           average_price: (3 * 3400.0 - 1 * 3450.0) / 2, // Net cost divided by remaining quantity
-          total_value: 2 * 3450.0,
+          //total_value: 2 * 3450.0,
           createdAt: new Date(),
           updatedAt: new Date(),
         },

@@ -1,6 +1,8 @@
 import { Model, DataTypes, Optional } from 'sequelize';
 import { SequelizeConnection } from '../../database';
 import User from '../user/User';
+import Trade from '../trade/Trade';
+import PortfolioHoldings from './PortfolioHoldings';
 
 // Define the attributes for the Portfolio model
 interface PortfolioAttributes {
@@ -9,10 +11,7 @@ interface PortfolioAttributes {
 }
 
 // Define the creation attributes for the Portfolio model
-type PortfolioCreationAttributes = Optional<PortfolioAttributes, 'portfolio_id'>
-
-const sequelizeConnection = SequelizeConnection.getInstance();
-
+type PortfolioCreationAttributes = Optional<PortfolioAttributes, 'portfolio_id'>;
 
 // Define the Portfolio model class
 class Portfolio extends Model<PortfolioAttributes, PortfolioCreationAttributes> implements PortfolioAttributes {
@@ -22,7 +21,16 @@ class Portfolio extends Model<PortfolioAttributes, PortfolioCreationAttributes> 
   // Timestamps
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
+
+  // Associations
+  public static associate(): void {
+    Portfolio.belongsTo(User, { foreignKey: 'user_id' });
+    Portfolio.hasMany(Trade, { foreignKey: 'portfolio_id' });
+    Portfolio.hasMany(PortfolioHoldings, { foreignKey: 'portfolio_id' });
+  }
 }
+
+const sequelizeConnection = SequelizeConnection.getInstance();
 
 // Initialize the Portfolio model
 Portfolio.init(
@@ -37,7 +45,7 @@ Portfolio.init(
       allowNull: false,
       references: {
         model: User,
-        key: 'id', // Corrected the key to match the User model's primary key
+        key: 'id', // Ensure this matches the User model's primary key
       },
       unique: true,
     },

@@ -13,8 +13,6 @@ interface SharePriceAttributes {
 // Define the creation attributes for the SharePrice model
 type SharePriceCreationAttributes = Optional<SharePriceAttributes, 'price_id' | 'recorded_at'>;
 
-const sequelizeConnection = SequelizeConnection.getInstance();
-
 // Define the SharePrice model class
 class SharePrice extends Model<SharePriceAttributes, SharePriceCreationAttributes> implements SharePriceAttributes {
   public price_id!: number;
@@ -25,7 +23,15 @@ class SharePrice extends Model<SharePriceAttributes, SharePriceCreationAttribute
   // Timestamps
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
+
+  // Associations
+  public static associate(): void {
+    // Define associations here if needed
+    SharePrice.belongsTo(Share, { foreignKey: 'share_id' });
+  }
 }
+
+const sequelizeConnection = SequelizeConnection.getInstance();
 
 // Initialize the SharePrice model
 SharePrice.init(
