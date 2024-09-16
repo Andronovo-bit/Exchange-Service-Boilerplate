@@ -25,6 +25,7 @@ module.exports = {
           password: hashedPasswords[0],
           createdAt: new Date(),
           updatedAt: new Date(),
+          balance: 0,
         },
         {
           username: 'user2',
@@ -32,6 +33,7 @@ module.exports = {
           password: hashedPasswords[1],
           createdAt: new Date(),
           updatedAt: new Date(),
+          balance: 0,
         },
         {
           username: 'user3',
@@ -39,6 +41,7 @@ module.exports = {
           password: hashedPasswords[2],
           createdAt: new Date(),
           updatedAt: new Date(),
+          balance: 0,
         },
         {
           username: 'user4',
@@ -46,6 +49,7 @@ module.exports = {
           password: hashedPasswords[3],
           createdAt: new Date(),
           updatedAt: new Date(),
+          balance: 0,
         },
         {
           username: 'user5',
@@ -53,10 +57,75 @@ module.exports = {
           password: hashedPasswords[4],
           createdAt: new Date(),
           updatedAt: new Date(),
+          balance: 0,
         },
       ];
 
       await queryInterface.bulkInsert('users', userData, { ...options, transaction });
+
+      const usersQuery = await queryInterface.sequelize.query(`SELECT id FROM users;`, {
+        transaction,
+      });
+      const userRows = usersQuery[0];
+
+      // Insert transactions (DEPOSIT)
+      const transactionsDepositData = [
+        // User 1
+        {
+          user_id: userRows[0].id,
+          transaction_type: 'DEPOSIT',
+          amount: 100000,
+          description: 'Initial deposit',
+          transaction_date: new Date(),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        // User 2
+        {
+          user_id: userRows[1].id,
+          transaction_type: 'DEPOSIT',
+          amount: 150000,
+          description: 'Trading capital',
+          transaction_date: new Date(),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        // User 3
+        {
+          user_id: userRows[2].id,
+          transaction_type: 'DEPOSIT',
+          amount: 80000,
+          description: 'Investment funds',
+          transaction_date: new Date(),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        // User 4
+        {
+          user_id: userRows[3].id,
+          transaction_type: 'DEPOSIT',
+          amount: 50000,
+          description: 'Starting investment',
+          transaction_date: new Date(),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        // User 5
+        {
+          user_id: userRows[4].id,
+          transaction_type: 'DEPOSIT',
+          amount: 120000,
+          description: 'Initial funds',
+          transaction_date: new Date(),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ];
+
+      await queryInterface.bulkInsert('transactions', transactionsDepositData, {
+        ...options,
+        transaction,
+      });
 
       // Insert shares with correct symbols
       const shareData = [
@@ -118,10 +187,6 @@ module.exports = {
       });
 
       // Insert portfolios
-      const usersQuery = await queryInterface.sequelize.query(`SELECT id FROM users;`, {
-        transaction,
-      });
-      const userRows = usersQuery[0];
 
       const portfolioData = userRows.map((user) => ({
         user_id: user.id,
@@ -139,94 +204,6 @@ module.exports = {
         transaction,
       });
       const portfolioRows = portfolioQuery[0];
-
-      // Insert transactions (DEPOSIT and WITHDRAWAL)
-      const transactionsData = [
-        // User 1
-        {
-          user_id: userRows[0].id,
-          transaction_type: 'DEPOSIT',
-          amount: 10000,
-          description: 'Initial deposit',
-          transaction_date: new Date(),
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          user_id: userRows[0].id,
-          transaction_type: 'WITHDRAWAL',
-          amount: 2000,
-          description: 'Withdrawal for personal use',
-          transaction_date: new Date(),
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        // User 2
-        {
-          user_id: userRows[1].id,
-          transaction_type: 'DEPOSIT',
-          amount: 15000,
-          description: 'Trading capital',
-          transaction_date: new Date(),
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        // User 3
-        {
-          user_id: userRows[2].id,
-          transaction_type: 'DEPOSIT',
-          amount: 8000,
-          description: 'Investment funds',
-          transaction_date: new Date(),
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          user_id: userRows[2].id,
-          transaction_type: 'WITHDRAWAL',
-          amount: 3000,
-          description: 'Partial withdrawal',
-          transaction_date: new Date(),
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        // User 4
-        {
-          user_id: userRows[3].id,
-          transaction_type: 'DEPOSIT',
-          amount: 5000,
-          description: 'Starting investment',
-          transaction_date: new Date(),
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        // User 5
-        {
-          user_id: userRows[4].id,
-          transaction_type: 'DEPOSIT',
-          amount: 12000,
-          description: 'Initial funds',
-          transaction_date: new Date(),
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          user_id: userRows[4].id,
-          transaction_type: 'WITHDRAWAL',
-          amount: 4000,
-          description: 'Emergency withdrawal',
-          transaction_date: new Date(),
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-      ];
-
-      await queryInterface.bulkInsert('transactions', transactionsData, {
-        ...options,
-        transaction,
-      });
-
-      console.log(shareRows);
 
       // Insert trades (BUY and SELL)
       const tradesData = [
@@ -267,7 +244,7 @@ module.exports = {
           portfolio_id: portfolioRows.find((p) => p.user_id === userRows[2].id).portfolio_id,
           share_id: shareRows.find((s) => s.symbol === 'GGL').share_id,
           trade_type: 'BUY',
-          quantity: 5,
+          quantity: 1,
           price: 2800.0,
           trade_date: new Date(),
           createdAt: new Date(),
@@ -277,7 +254,7 @@ module.exports = {
           portfolio_id: portfolioRows.find((p) => p.user_id === userRows[2].id).portfolio_id,
           share_id: shareRows.find((s) => s.symbol === 'GGL').share_id,
           trade_type: 'SELL',
-          quantity: 2,
+          quantity: 1,
           price: 2850.0,
           trade_date: new Date(),
           createdAt: new Date(),
@@ -374,6 +351,65 @@ module.exports = {
       ];
 
       await queryInterface.bulkInsert('portfolio_holdings', portfolioHoldingsData, {
+        ...options,
+        transaction,
+      });
+
+      // Insert transactions (DEPOSIT)
+      const transactionsWithDrawalData = [
+        // User 1
+        {
+          user_id: userRows[0].id,
+          transaction_type: 'WITHDRAWAL',
+          amount: 2000,
+          description: 'Withdrawal for personal use',
+          transaction_date: new Date(),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        // User 2
+        {
+          user_id: userRows[1].id,
+          transaction_type: 'WITHDRAWAL',
+          amount: 1500,
+          description: 'Trading capital',
+          transaction_date: new Date(),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        // User 3
+        {
+          user_id: userRows[2].id,
+          transaction_type: 'WITHDRAWAL',
+          amount: 3000,
+          description: 'Partial withdrawal',
+          transaction_date: new Date(),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        // User 4
+        {
+          user_id: userRows[3].id,
+          transaction_type: 'WITHDRAWAL',
+          amount: 5000,
+          description: 'Starting investment',
+          transaction_date: new Date(),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        // User 5
+        {
+          user_id: userRows[4].id,
+          transaction_type: 'WITHDRAWAL',
+          amount: 4000,
+          description: 'Emergency withdrawal',
+          transaction_date: new Date(),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ];
+
+      await queryInterface.bulkInsert('transactions', transactionsWithDrawalData, {
         ...options,
         transaction,
       });

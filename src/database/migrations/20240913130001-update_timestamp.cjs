@@ -5,14 +5,14 @@ module.exports = {
       CREATE OR REPLACE FUNCTION update_timestamp()
       RETURNS TRIGGER AS $$
       BEGIN
-        NEW.updated_at = NOW();
+        NEW."updatedAt" = NOW();
         RETURN NEW;
       END;
       $$ LANGUAGE plpgsql;
     `);
 
     // Create triggers for each table to use the update_timestamp function
-    const tables = ['users', 'portfolios', 'shares', 'portfolio_holdings'];
+    const tables = ['users', 'portfolios', 'shares', 'portfolio_holdings', 'transactions', 'trades', 'share_prices'];
     for (const table of tables) {
       await queryInterface.sequelize.query(`
         CREATE TRIGGER trg_update_${table}_timestamp
@@ -25,12 +25,13 @@ module.exports = {
 
   down: async (queryInterface) => {
     // Drop triggers and functions
-    const tables = ['users', 'portfolios', 'shares', 'portfolio_holdings'];
+    const tables = ['users', 'portfolios', 'shares', 'portfolio_holdings', 'transactions', 'trades', 'share_prices'];
     for (const table of tables) {
       await queryInterface.sequelize.query(`
         DROP TRIGGER IF EXISTS trg_update_${table}_timestamp ON ${table};
       `);
     }
+
     await queryInterface.sequelize.query(`
       DROP FUNCTION IF EXISTS update_timestamp();
     `);
