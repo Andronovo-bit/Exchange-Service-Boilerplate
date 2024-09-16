@@ -35,6 +35,9 @@ const config = {
     dialect: envVars.DB_DIALECT,
     logging: envVars.NODE_ENV === 'development' ? console.log : false,
   },
+  api: {
+    prefix: "/api",
+  },
 };
 
 export default config;

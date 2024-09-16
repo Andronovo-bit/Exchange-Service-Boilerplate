@@ -5,7 +5,7 @@ import Portfolio from '../portfolio/Portfolio';
 import Transaction from '../transaction/Transaction';
 
 // Define the attributes for the User model
-interface UserAttributes {
+export interface UserAttributes {
   id: number;
   username: string;
   email: string;
@@ -14,12 +14,13 @@ interface UserAttributes {
 }
 
 // Define the creation attributes for the User model
-type UserCreationAttributes = Optional<UserAttributes, 'id'>;
+export type UserCreationAttributes = Optional<UserAttributes, 'id'>;
+
 
 const sequelizeConnection = SequelizeConnection.getInstance();
 
 // Define the User model class
-export class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
+class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
   public id!: number;
   public username!: string;
   public email!: string;

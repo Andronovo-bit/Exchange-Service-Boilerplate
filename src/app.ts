@@ -5,6 +5,9 @@ import { connectDatabase } from './config/database/sequelize';
 import { initializeModels } from './config/database/initModels';
 import morgan from 'morgan';
 import Trade from './models/trade/Trade';
+import User from './models/user/User';
+import routes from './api';
+
 
 const app = express();
 
@@ -19,6 +22,8 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
+
+app.use(config.api.prefix, routes());
 
 //test trade add api
 app.get('/trade', async (req, res) => {
@@ -46,6 +51,8 @@ const startServer = async () => {
     app.listen(config.server.port, () => {
       console.log(`Server is running on port ${config.server.port}`);
     });
+
+    console.log(typeof User);
   } catch (error) {
     console.error('Failed to start the server:', error);
     process.exit(1);
