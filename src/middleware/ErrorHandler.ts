@@ -10,6 +10,6 @@ export function errorHandler(err: Error, req: Request, res: Response, next: Next
   } else if (err instanceof ValidationError) {
     error(res, 400, 'VALIDATION_ERROR', err.message);
   } else {
-    error(res, 500, 'SERVER_ERROR', 'Bir hata oluştu. ' + err.message);
+    error(res, 500, 'SERVER_ERROR', 'Something broke! ' + err.message);
   }
 }
