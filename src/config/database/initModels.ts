@@ -10,8 +10,13 @@ export const initializeModels = async (): Promise<void> => {
   try {
     // In development, sync models with { alter: true } to auto-update tables.
 
-    const syncOptions = config.env === 'development' ? { alter: true } : {};
+    // const syncOptions =  {
+    //   force: config.env === 'test',
+    //   alter: config.env === 'development',
+    // }
 
+    const syncOptions = {};
+    
     // Sync all models with the database
     const dbModels: SequelizeModels = {};
     syncOrderedModels.forEach((model) => {

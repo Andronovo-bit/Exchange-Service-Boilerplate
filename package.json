@@ -4,7 +4,7 @@
   "main": "dist/app.js",
   "scripts": {
     "test": "jest --coverage",
-    "start": "ts-node ./app.ts",
+    "start": "tsx ./src/app.ts",
     "dev": "nodemon",
     "build": "npx tsc",
     "migrate:generate": "npx sequelize-cli migration:generate --name",

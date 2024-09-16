@@ -5,15 +5,15 @@ const path = require('path');
 
 module.exports = {
   // Current environment for example development or production
-  env: process.env.NODE_ENV,
+  'env': process.env.NODE_ENV,
   // Folder to seeders
   'seeders-path': path.resolve('src', 'database', 'seeders'),
   // Folder to migrations
   'migrations-path': path.resolve('src', 'database', 'migrations'),
   // Url to connect to DB
-  url: process.env.DB_URI,
+  'url': process.env.DB.HOST,
   // Folder to models
   'models-path': path.resolve('src/models'),
   // Folder to config
-  config: path.resolve('src', 'database', 'config.js'),
+  'config': path.resolve('src', 'database', 'config.js'),
 };
