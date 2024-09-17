@@ -17,7 +17,7 @@ class TradeRepository extends GenericRepository<Trade, TradeAttributes, TradeCre
       where: { user_id: userId },
       attributes: ['portfolio_id'],
     });
-    
+
     if (!portfolio) {
       return [];
     }
@@ -25,7 +25,7 @@ class TradeRepository extends GenericRepository<Trade, TradeAttributes, TradeCre
   }
 
   // Create a new trade
-  public async createTrade(data: Trade): Promise<Trade> {
+  public async createTrade(data: TradeCreationAttributes): Promise<Trade> {
     return await this.create(data);
   }
 }
