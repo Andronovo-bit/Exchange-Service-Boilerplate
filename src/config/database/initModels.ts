@@ -2,6 +2,7 @@
 import sequelize from './sequelize';
 import syncOrderedModels from '../../models';
 import { Model, ModelStatic } from 'sequelize';
+import config from '../config';
 
 type SequelizeModels = { [key: string]: ModelStatic<Model> };
 
@@ -9,12 +10,13 @@ export const initializeModels = async (): Promise<void> => {
   try {
     // In development, sync models with { alter: true } to auto-update tables.
 
-    // const syncOptions =  {
-    //   force: config.env === 'test',
-    //   alter: config.env === 'development',
-    // }
+    const syncOptions = {
+      force: config.env === 'development',
+      alter: config.env === 'development',
+      cascade: true,
+    };
 
-    const syncOptions = {};
+    // const syncOptions = {};
     
     // Sync all models with the database
     const dbModels: SequelizeModels = {};

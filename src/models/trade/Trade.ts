@@ -11,6 +11,7 @@ interface TradeAttributes {
   trade_type: 'BUY' | 'SELL';
   quantity: number;
   price: number;
+  price_type: 'LIMIT' | 'MARKET';
   trade_date: Date;
 }
 
@@ -25,6 +26,7 @@ class Trade extends Model<TradeAttributes, TradeCreationAttributes> implements T
   public trade_type!: 'BUY' | 'SELL';
   public quantity!: number;
   public price!: number;
+  public price_type!: 'LIMIT' | 'MARKET';
   public trade_date!: Date;
 
   // Timestamps
@@ -77,11 +79,15 @@ Trade.init(
       },
     },
     price: {
-      type: DataTypes.DECIMAL(15, 6),
+      type: DataTypes.DECIMAL(15, 2),
       allowNull: false,
       validate: {
         min: 0,
       },
+    },
+    price_type: {
+      type: DataTypes.ENUM('LIMIT', 'MARKET'),
+      allowNull: false,
     },
     trade_date: {
       type: DataTypes.DATE,

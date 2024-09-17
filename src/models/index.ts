@@ -7,8 +7,9 @@ import Trade from './trade/Trade';
 import PortfolioHoldings from './portfolio/PortfolioHoldings';
 import Transaction from './transaction/Transaction';
 import SharePrice from './share/SharePrice';
+import Order from './order/Order';
 
-const syncOrderedModels = [User, Transaction, Portfolio, Share, Trade, PortfolioHoldings, SharePrice];
+const syncOrderedModels = [User, Transaction, Portfolio, Share, Trade, PortfolioHoldings, SharePrice, Order];
 
 // Set up associations
 Object.values(syncOrderedModels).forEach((model: any) => {

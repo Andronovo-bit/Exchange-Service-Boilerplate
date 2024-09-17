@@ -11,7 +11,7 @@ module.exports = {
   // Folder to migrations
   'migrations-path': path.resolve('src', 'database', 'migrations'),
   // Url to connect to DB
-  'url': process.env.DB.HOST,
+  'url': process.env.DB_URI,
   // Folder to models
   'models-path': path.resolve('src/models'),
   // Folder to config

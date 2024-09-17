@@ -71,14 +71,14 @@ PortfolioHoldings.init(
       },
     },
     average_price: {
-      type: DataTypes.DECIMAL(15, 6),
+      type: DataTypes.DECIMAL(15, 2),
       allowNull: false,
       validate: {
         min: 0,
       },
     },
     total_value: {
-      type: DataTypes.VIRTUAL(DataTypes.DECIMAL(20, 6), ['quantity', 'average_price']),
+      type: DataTypes.VIRTUAL(DataTypes.DECIMAL(20, 2), ['quantity', 'average_price']),
       get() {
         return this.getDataValue('quantity') * this.getDataValue('average_price');
       },
