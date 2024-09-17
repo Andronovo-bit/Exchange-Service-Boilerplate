@@ -3,7 +3,7 @@ import { SequelizeConnection } from '../../database';
 import User from '../user/User';
 
 // Define the attributes for the Transaction model
-interface TransactionAttributes {
+export interface TransactionAttributes {
   transaction_id: number;
   user_id: number;
   transaction_type: 'DEPOSIT' | 'WITHDRAWAL';
@@ -13,7 +13,7 @@ interface TransactionAttributes {
 }
 
 // Define the creation attributes for the Transaction model
-type TransactionCreationAttributes = Optional<TransactionAttributes, 'transaction_id' | 'transaction_date'>;
+export type TransactionCreationAttributes = Optional<TransactionAttributes, 'transaction_id' | 'transaction_date'>;
 
 // Define the Transaction model class
 class Transaction extends Model<TransactionAttributes, TransactionCreationAttributes> implements TransactionAttributes {

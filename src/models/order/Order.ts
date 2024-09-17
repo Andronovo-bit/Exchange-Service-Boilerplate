@@ -4,7 +4,7 @@ import Share from '../share/Share';
 import { SequelizeConnection } from '../../database';
 
 // Define the attributes for the Order model
-interface OrderAttributes {
+export interface OrderAttributes {
   order_id: number;
   portfolio_id: number;
   share_id: number;
@@ -17,7 +17,7 @@ interface OrderAttributes {
 }
 
 // Define the creation attributes for the Order model
-type OrderCreationAttributes = Optional<OrderAttributes, 'order_id' | 'order_date'>;
+export type OrderCreationAttributes = Optional<OrderAttributes, 'order_id' | 'order_date'>;
 
 // Define the Order model class
 class Order extends Model<OrderAttributes, OrderCreationAttributes> implements OrderAttributes {

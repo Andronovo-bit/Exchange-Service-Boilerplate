@@ -5,13 +5,13 @@ import Trade from '../trade/Trade';
 import PortfolioHoldings from './PortfolioHoldings';
 
 // Define the attributes for the Portfolio model
-interface PortfolioAttributes {
+export interface PortfolioAttributes {
   portfolio_id: number;
   user_id: number;
 }
 
 // Define the creation attributes for the Portfolio model
-type PortfolioCreationAttributes = Optional<PortfolioAttributes, 'portfolio_id'>;
+export type PortfolioCreationAttributes = Optional<PortfolioAttributes, 'portfolio_id'>;
 
 // Define the Portfolio model class
 class Portfolio extends Model<PortfolioAttributes, PortfolioCreationAttributes> implements PortfolioAttributes {

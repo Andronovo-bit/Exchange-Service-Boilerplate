@@ -3,7 +3,7 @@ import { SequelizeConnection } from '../../database';
 import Share from './Share';
 
 // Define the attributes for the SharePrice model
-interface SharePriceAttributes {
+export interface SharePriceAttributes {
   price_id: number;
   share_id: number;
   price: number;
@@ -11,7 +11,7 @@ interface SharePriceAttributes {
 }
 
 // Define the creation attributes for the SharePrice model
-type SharePriceCreationAttributes = Optional<SharePriceAttributes, 'price_id' | 'recorded_at'>;
+export type SharePriceCreationAttributes = Optional<SharePriceAttributes, 'price_id' | 'recorded_at'>;
 
 // Define the SharePrice model class
 class SharePrice extends Model<SharePriceAttributes, SharePriceCreationAttributes> implements SharePriceAttributes {

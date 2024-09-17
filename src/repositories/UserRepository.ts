@@ -2,7 +2,9 @@
 
 import { GenericRepository } from './generic/GenericRepository';
 import User, { UserAttributes, UserCreationAttributes } from '../models/user/User';
+import { injectable } from 'inversify';
 
+@injectable()
 class UserRepository extends GenericRepository<User, UserAttributes, UserCreationAttributes> {
   constructor() {
     super(User);
@@ -14,4 +16,4 @@ class UserRepository extends GenericRepository<User, UserAttributes, UserCreatio
   }
 }
 
-export default new UserRepository();
+export default UserRepository;

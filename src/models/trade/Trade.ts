@@ -4,7 +4,7 @@ import Portfolio from '../portfolio/Portfolio';
 import Share from '../share/Share';
 
 // Define the attributes for the Trade model
-interface TradeAttributes {
+export interface TradeAttributes {
   trade_id: number;
   portfolio_id: number;
   share_id: number;
@@ -16,7 +16,7 @@ interface TradeAttributes {
 }
 
 // Define the creation attributes for the Trade model
-type TradeCreationAttributes = Optional<TradeAttributes, 'trade_id' | 'trade_date'>;
+export type TradeCreationAttributes = Optional<TradeAttributes, 'trade_id' | 'trade_date'>;
 
 // Define the Trade model class
 class Trade extends Model<TradeAttributes, TradeCreationAttributes> implements TradeAttributes {
