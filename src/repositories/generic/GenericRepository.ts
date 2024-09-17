@@ -45,4 +45,12 @@ export class GenericRepository<
     await instance.destroy();
     return true;
   }
+
+  async findAll(options?: FindOptions<TAttributes>): Promise<T[]> {
+    return await this.model.findAll(options);
+  }
+
+  async findByPk(id: number, options?: FindOptions<TAttributes>): Promise<T | null> {
+    return await this.model.findByPk(id, options);
+  }
 }

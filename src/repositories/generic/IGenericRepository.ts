@@ -12,4 +12,6 @@ export interface IGenericRepository<
   create(data: TCreationAttributes): Promise<T>;
   update(id: number, data: Partial<TAttributes>): Promise<T | null>;
   delete(id: number): Promise<boolean>;
+  findAll(options?: FindOptions<TAttributes>): Promise<T[]>;
+  findByPk(id: number, options?: FindOptions<TAttributes>): Promise<T | null>;
 }

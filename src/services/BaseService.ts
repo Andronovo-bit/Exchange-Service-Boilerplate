@@ -33,4 +33,12 @@ export abstract class BaseService<
   public async delete(id: number): Promise<boolean> {
     return this.repository.delete(id);
   }
+
+  public async findAll(options?: FindOptions<TAttributes>): Promise<T[]> {
+    return this.repository.findAll(options);
+  }
+
+  public async findById(id: number, options?: FindOptions<TAttributes>): Promise<T | null> {
+    return this.repository.findByPk(id, options);
+  }
 }
