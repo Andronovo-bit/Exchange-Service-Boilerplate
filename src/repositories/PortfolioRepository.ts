@@ -7,26 +7,62 @@ import PortfolioHoldings from '../models/portfolio/PortfolioHoldings';
 @injectable()
 class PortfolioRepository extends GenericRepository<Portfolio, PortfolioAttributes, PortfolioCreationAttributes> {
   constructor() {
-    super(Portfolio); // PortfolioHoldings modelini BaseRepository'ye geçiriyoruz
+    super(Portfolio);
   }
 
-  // Kullanıcının portföyünü getir
-  public async findByUserId(userId: number): Promise<PortfolioHoldings[]> {
-    const portfolio_id = await Portfolio.findOne({
+  /**
+   * Get the portfolio of a user by user ID.
+   * @param userId - The ID of the user.
+   * @returns A promise that resolves to the portfolio of the user.
+   */
+
+  public async findPortfolioByUserId(userId: number): Promise<Portfolio | null> {
+    return Portfolio.findOne({
+      where: { user_id: userId },
+    });
+  }
+
+  /**
+   * Get the portfolio holdings of a user by user ID.
+   * @param userId - The ID of the user.
+   * @returns A promise that resolves to an array of portfolio holdings.
+   */
+  public async findPortfolioHoldingsByUserId(userId: number): Promise<PortfolioHoldings[]> {
+    const portfolio = await Portfolio.findOne({
       where: { user_id: userId },
       attributes: ['portfolio_id'],
     });
 
-    if (!portfolio_id) {
+    if (!portfolio) {
       return [];
     }
 
-    const portfolioHoldings = await PortfolioHoldings.findAll({
-      where: { portfolio_id: portfolio_id.portfolio_id },
+    return PortfolioHoldings.findAll({
+      where: { portfolio_id: portfolio.portfolio_id },
       include: Share,
     });
+  }
 
-    return portfolioHoldings;
+  /**
+   * Get the portfolio holding by user ID and share ID.
+   * @param userId - The ID of the user.
+   * @param shareId - The ID of the share.
+   * @returns A promise that resolves to the portfolio holding or null if not found.
+   */
+  public async findPortfolioHoldingsByShareId(userId: number, shareId: number): Promise<PortfolioHoldings | null> {
+    const portfolio = await Portfolio.findOne({
+      where: { user_id: userId },
+      attributes: ['portfolio_id'],
+    });
+
+    if (!portfolio) {
+      return null;
+    }
+
+    return PortfolioHoldings.findOne({
+      where: { portfolio_id: portfolio.portfolio_id, share_id: shareId },
+      include: Share,
+    });
   }
 }
 

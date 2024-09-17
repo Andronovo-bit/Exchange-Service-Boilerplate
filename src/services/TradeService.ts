@@ -32,9 +32,10 @@ class TradeService extends BaseService<Trade, TradeAttributes, TradeCreationAttr
     const user = await this.userRepository.findByPk(userId);
     if (!user) throw new Error('User not found');
 
-    const portfolio = await this.portfolioRepository.findByUserId(userId);
-    const portfolioId = portfolio[0]?.portfolio_id;
-    if (!portfolioId) throw new Error('Portfolio not found');
+    const portfolio = await this.portfolioRepository.findPortfolioByUserId(userId);
+    if (!portfolio) throw new Error('Portfolio not found');
+
+    const portfolioId = portfolio.portfolio_id;
 
     if (user.balance < totalCost) throw new Error('Insufficient balance');
 
@@ -68,9 +69,9 @@ class TradeService extends BaseService<Trade, TradeAttributes, TradeCreationAttr
     const user = await this.userRepository.findByPk(userId);
     if (!user) throw new Error('User not found');
 
-    const portfolio = await this.portfolioRepository.findByUserId(userId);
-    const portfolioId = portfolio[0]?.portfolio_id;
-    if (!portfolioId) throw new Error('Portfolio not found');
+    const portfolio = await this.portfolioRepository.findPortfolioByUserId(userId);
+    if (!portfolio) throw new Error('Portfolio not found');
+    const portfolioId = portfolio.portfolio_id;
 
     user.balance += totalGain;
     await user.save();
@@ -99,9 +100,9 @@ class TradeService extends BaseService<Trade, TradeAttributes, TradeCreationAttr
     const user = await this.userRepository.findByPk(userId);
     if (!user) throw new Error('User not found');
 
-    const portfolio = await this.portfolioRepository.findByUserId(userId);
-    const portfolioId = portfolio[0]?.portfolio_id;
-    if (!portfolioId) throw new Error('Portfolio not found');
+    const portfolio = await this.portfolioRepository.findPortfolioByUserId(userId);
+    if (!portfolio) throw new Error('Portfolio not found');
+    const portfolioId = portfolio.portfolio_id;
 
     const trade: TradeCreationAttributes = {
       portfolio_id: portfolioId,
@@ -127,9 +128,9 @@ class TradeService extends BaseService<Trade, TradeAttributes, TradeCreationAttr
     const user = await this.userRepository.findByPk(userId);
     if (!user) throw new Error('User not found');
 
-    const portfolio = await this.portfolioRepository.findByUserId(userId);
-    const portfolioId = portfolio[0]?.portfolio_id;
-    if (!portfolioId) throw new Error('Portfolio not found');
+    const portfolio = await this.portfolioRepository.findPortfolioByUserId(userId);
+    if (!portfolio) throw new Error('Portfolio not found');
+    const portfolioId = portfolio.portfolio_id;
 
     const trade: TradeCreationAttributes = {
       portfolio_id: portfolioId,

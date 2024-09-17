@@ -16,35 +16,26 @@ class OrderService extends BaseService<Order, OrderAttributes, OrderCreationAttr
   /**
    * Create a new limit order.
    * @param userId - The ID of the user.
-   * @param shareId - The ID of the share.
-   * @param price - The price of the order.
-   * @param quantity - The quantity of the order.
-   * @param orderType - The type of the order (BUY or SELL).
+   * @param data - The order creation attributes.
    * @returns A promise that resolves to the created order.
    */
-  public async createOrder(
-    userId: number,
-    shareId: number,
-    price: number,
-    quantity: number,
-    orderType: 'BUY' | 'SELL',
-  ): Promise<Order> {
-    const portfolio = await this.portfolioRepository.findByUserId(userId);
-    if (!portfolio.length) throw new Error('Portfolio not found');
+  public async createOrder(userId: number, data: OrderCreationAttributes): Promise<Order> {
+    const portfolio = await this.portfolioRepository.findPortfolioByUserId(userId);
+    if (!portfolio) {
+      throw new Error('Portfolio not found');
+    }
 
-    const portfolioId = portfolio[0].portfolio_id;
+    const { portfolio_id: portfolioId } = portfolio;
 
-    const order = await this.orderRepository.create({
-      portfolio_id: portfolioId,
-      share_id: shareId,
-      price,
-      quantity,
-      order_type: orderType,
-      status: 'PENDING',
-      remaining_quantity: quantity,
-    });
+    if (!portfolioId) {
+      throw new Error('Portfolio for the given share_id not found');
+    }
 
-    return order;
+    if (data.portfolio_id !== portfolioId) {
+      throw new Error('Portfolio ID does not match the user portfolio ID');
+    }
+
+    return this.orderRepository.create(data);
   }
 
   /**
