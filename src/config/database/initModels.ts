@@ -10,13 +10,13 @@ export const initializeModels = async (): Promise<void> => {
   try {
     // In development, sync models with { alter: true } to auto-update tables.
 
-    const syncOptions = {
-      force: config.env === 'development',
-      alter: config.env === 'development',
-      cascade: true,
-    };
+    // const syncOptions = {
+    //   force: config.env === 'development',
+    //   alter: config.env === 'development',
+    //   cascade: true,
+    // };
 
-    // const syncOptions = {};
+    const syncOptions = {};
     
     // Sync all models with the database
     const dbModels: SequelizeModels = {};

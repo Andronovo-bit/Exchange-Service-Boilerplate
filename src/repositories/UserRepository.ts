@@ -2,11 +2,15 @@
 
 import { GenericRepository } from './generic/GenericRepository';
 import User, { UserAttributes, UserCreationAttributes } from '../models/user/User';
-import { injectable } from 'inversify';
+import { injectable, inject } from 'inversify';
+import 'reflect-metadata';
+import { Sequelize } from 'sequelize';
 
 @injectable()
 class UserRepository extends GenericRepository<User, UserAttributes, UserCreationAttributes> {
-  constructor() {
+  constructor(
+    @inject('SequelizeInstance') private sequelizeInstance: Sequelize
+  ) {
     super(User);
   }
 

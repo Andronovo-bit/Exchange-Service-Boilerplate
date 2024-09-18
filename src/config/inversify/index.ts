@@ -13,8 +13,18 @@ import TradeService from '../../services/TradeService';
 import PortfolioService from '../../services/PortfolioService';
 import OrderService from '../../services/OrderService';
 import PriceService from '../../services/PriceService';
+import { BaseService } from '../../services/BaseService';
+import { object } from 'joi';
+import { Sequelize } from 'sequelize';
+import { SequelizeConnection } from '../database/sequelizeInstance';
+import { PortfolioController } from '../../controller/PortfolioController';
+import { TradeController } from '../../controller/TradeController';
+import { TransactionController } from '../../controller/TransactionController';
+import OrderController from '../../controller/OrderController';
+import { PriceController } from '../../controller/PriceController';
 
-const container = new Container();
+const container = new Container({ autoBindInjectable: true });
+
 
 // Determine the repositories
 container.bind<UserRepository>(UserRepository).to(UserRepository);
@@ -31,9 +41,15 @@ container.bind<TradeService>(TradeService).to(TradeService);
 container.bind<PortfolioService>(PortfolioService).to(PortfolioService);
 container.bind<OrderService>(OrderService).to(OrderService);
 container.bind<PriceService>(PriceService).to(PriceService);
+container.bind<BaseService<any, any, any>>(BaseService);
 
-
+container.bind<Sequelize>('SequelizeInstance').toConstantValue(SequelizeConnection.getInstance());
 // Determine the controllers
 container.bind<UserController>(UserController).to(UserController);
+container.bind<PortfolioController>(PortfolioController).to(PortfolioController);
+container.bind<TradeController>(TradeController).to(TradeController);
+container.bind<PriceController>(PriceController).to(PriceController);
+container.bind<TransactionController>(TransactionController).to(TransactionController);
+container.bind<OrderController>(OrderController).to(OrderController);
 
 export default container;

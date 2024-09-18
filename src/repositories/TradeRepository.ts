@@ -1,11 +1,12 @@
+import { Sequelize } from 'sequelize';
 import Portfolio from '../models/portfolio/Portfolio'; // Portfolio model
 import Trade, { TradeAttributes, TradeCreationAttributes } from '../models/trade/Trade'; // Trade model
 import { GenericRepository } from './generic/GenericRepository';
-import { injectable } from 'inversify';
+import { inject, injectable } from 'inversify';
 
 @injectable()
 class TradeRepository extends GenericRepository<Trade, TradeAttributes, TradeCreationAttributes> {
-  constructor() {
+  constructor(@inject('SequelizeInstance') private sequelizeInstance: Sequelize) {
     super(Trade); // Trade modelini BaseRepository'ye geçiriyoruz
   }
 

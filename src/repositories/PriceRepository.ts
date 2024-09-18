@@ -1,10 +1,11 @@
+import { Sequelize } from 'sequelize';
 import SharePrice, { SharePriceAttributes, SharePriceCreationAttributes } from '../models/share/SharePrice'; // SharePrice model
 import { GenericRepository } from './generic/GenericRepository';
-import { injectable } from 'inversify';
+import { inject, injectable } from 'inversify';
 
 @injectable()
 class PriceRepository extends GenericRepository<SharePrice, SharePriceAttributes, SharePriceCreationAttributes> {
-  constructor() {
+  constructor(@inject('SequelizeInstance') private sequelizeInstance: Sequelize) {
     super(SharePrice); // SharePrice modelini BaseRepository'ye geçiriyoruz
   }
 

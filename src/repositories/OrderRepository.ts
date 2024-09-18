@@ -1,10 +1,11 @@
-import { injectable } from 'inversify';
+import { inject, injectable } from 'inversify';
 import Order, { OrderAttributes, OrderCreationAttributes } from '../models/order/Order';
 import { GenericRepository } from './generic/GenericRepository';
+import { Sequelize } from 'sequelize';
 
 @injectable()
 class OrderRepository extends GenericRepository<Order, OrderAttributes, OrderCreationAttributes> {
-  constructor() {
+  constructor(@inject('SequelizeInstance') private sequelizeInstance: Sequelize) {
     super(Order);
   }
 

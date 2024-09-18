@@ -1,12 +1,16 @@
-import { injectable } from 'inversify';
+import { injectable, inject } from 'inversify';
 import { GenericRepository } from './generic/GenericRepository';
 import Portfolio, { PortfolioAttributes, PortfolioCreationAttributes } from '../models/portfolio/Portfolio';
 import Share from '../models/share/Share';
 import PortfolioHoldings from '../models/portfolio/PortfolioHoldings';
+import { Sequelize } from 'sequelize';
+import User from '../models/user/User';
 
 @injectable()
 class PortfolioRepository extends GenericRepository<Portfolio, PortfolioAttributes, PortfolioCreationAttributes> {
-  constructor() {
+  constructor(
+    @inject('SequelizeInstance') private sequelizeInstance: Sequelize
+  ) {
     super(Portfolio);
   }
 
@@ -15,7 +19,6 @@ class PortfolioRepository extends GenericRepository<Portfolio, PortfolioAttribut
    * @param userId - The ID of the user.
    * @returns A promise that resolves to the portfolio of the user.
    */
-
   public async findPortfolioByUserId(userId: number): Promise<Portfolio | null> {
     return Portfolio.findOne({
       where: { user_id: userId },
@@ -30,6 +33,7 @@ class PortfolioRepository extends GenericRepository<Portfolio, PortfolioAttribut
   public async findPortfolioHoldingsByUserId(userId: number): Promise<PortfolioHoldings[]> {
     const portfolio = await Portfolio.findOne({
       where: { user_id: userId },
+      include: User,
       attributes: ['portfolio_id'],
     });
 
@@ -39,7 +43,23 @@ class PortfolioRepository extends GenericRepository<Portfolio, PortfolioAttribut
 
     return PortfolioHoldings.findAll({
       where: { portfolio_id: portfolio.portfolio_id },
-      include: Share,
+      attributes: ['portfolio_id', 'share_id','total_value', 'quantity', 'average_price'],
+      include: [
+        {
+          model: Share,
+          attributes: ['symbol', 'name', 'latest_price'],
+        },
+        {
+          model: Portfolio,
+          attributes: ['user_id'],
+          include: [
+            {
+              model: User,
+              attributes: ['username', 'email'],
+            },
+          ],
+        },
+      ],
     });
   }
 

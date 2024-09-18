@@ -2,7 +2,10 @@
 
 import { GenericRepository } from '../repositories/generic/GenericRepository';
 import { Model, FindOptions } from 'sequelize';
+import 'reflect-metadata';
+import { injectable } from 'inversify';
 
+@injectable()
 export abstract class BaseService<
   T extends Model<TAttributes, TCreationAttributes>,
   TAttributes extends object,
@@ -52,7 +55,7 @@ export abstract class BaseService<
    */
   public async update(id: number, data: Partial<TAttributes>): Promise<T | null> {
     if (!id) throw new Error('ID must be provided');
-    const instance = await this.repository.getById(id); 
+    const instance = await this.repository.getById(id);
     if (!instance) throw new Error('Instance not found: ' + typeof instance);
     if (!data) throw new Error('Data must be provided');
     return this.repository.update(id, data);

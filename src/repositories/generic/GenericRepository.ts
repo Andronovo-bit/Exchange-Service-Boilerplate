@@ -3,7 +3,10 @@
 import { Model, FindOptions, ModelStatic } from 'sequelize';
 import { IGenericRepository } from './IGenericRepository';
 import { MakeNullishOptional } from 'sequelize/types/utils';
+import 'reflect-metadata';
+import { injectable } from 'inversify';
 
+@injectable()
 export class GenericRepository<
   T extends Model<TAttributes, TCreationAttributes>,
   TAttributes extends object,
