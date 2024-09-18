@@ -2,6 +2,7 @@ import { Model, DataTypes, Optional } from 'sequelize';
 import { SequelizeConnection } from '../../database';
 import Portfolio from '../portfolio/Portfolio';
 import Share from '../share/Share';
+import { addTradeHook } from './hook';
 
 // Define the attributes for the Trade model
 export interface TradeAttributes {
@@ -17,6 +18,9 @@ export interface TradeAttributes {
 
 // Define the creation attributes for the Trade model
 export type TradeCreationAttributes = Optional<TradeAttributes, 'trade_id' | 'trade_date'>;
+
+// Define the request body for creating a trade
+export type TradeCreationRequest = Omit<TradeCreationAttributes, 'trade_id' | 'trade_date' | 'portfolio_id' | 'trade_type' | 'price_type' | 'price'>;
 
 // Define the Trade model class
 class Trade extends Model<TradeAttributes, TradeCreationAttributes> implements TradeAttributes {
@@ -98,6 +102,10 @@ Trade.init(
     },
   },
   {
+    hooks: {
+      // Add hooks here if needed
+      beforeCreate: addTradeHook,
+    },
     sequelize: sequelizeConnection,
     tableName: 'trades',
     timestamps: true, // Enable timestamps
