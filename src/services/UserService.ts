@@ -35,7 +35,8 @@ class UserService extends BaseService<User, UserAttributes, UserCreationAttribut
    * @returns A promise that resolves to an array of portfolio holdings.
    */
   public async getUserPortfolio(userId: number): Promise<PortfolioHoldings[]> {
-    const portfolio = await this.portfolioRepository.findByUserId(userId);
+    const portfolio = await this.portfolioRepository.findPortfolioHoldingsByUserId(userId);
+
     if (!portfolio.length) {
       throw new Error('No portfolio found for this user.');
     }

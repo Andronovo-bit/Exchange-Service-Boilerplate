@@ -7,6 +7,8 @@
     "start": "tsx ./src/app.ts",
     "dev": "nodemon",
     "build": "npx tsc",
+    "lint": "eslint 'src/**/*.{ts,js}'",
+    "format": "prettier --write 'src/**/*.{ts,js,json,md}'",
     "migrate:generate": "npx sequelize-cli migration:generate --name",
     "migrate": "npx sequelize-cli db:migrate",
     "migrate:undo": "npx sequelize-cli db:migrate:undo",
@@ -24,8 +26,10 @@
   "description": "",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "compression": "^1.7.4",
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
+    "helmet": "^7.1.0",
     "inversify": "^6.0.2",
     "joi": "^17.13.3",
     "morgan": "^1.10.0",
@@ -36,6 +40,7 @@
   "devDependencies": {
     "@eslint/js": "^9.10.0",
     "@types/bcrypt": "^5.0.2",
+    "@types/compression": "^1.7.5",
     "@types/express": "^4.17.21",
     "@types/inversify": "^2.0.33",
     "@types/morgan": "^1.9.9",

@@ -3,6 +3,8 @@ import config from '../config/config';
 import routes from '../api';
 import { errorHandler } from '../middleware/ErrorHandler';
 import morgan from 'morgan';
+import compression from 'compression';
+import helmet from 'helmet';
 
 export default ({ app }: { app: express.Application }) => {
   /**
@@ -32,7 +34,8 @@ export default ({ app }: { app: express.Application }) => {
   if (config.env === 'development') {
     app.use(morgan('dev'));
   }
-
+  app.use(compression());
+  app.use(helmet());
   // Load API routes
   app.use(config.api.prefix, routes());
 
