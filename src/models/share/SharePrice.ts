@@ -1,6 +1,7 @@
 import { Model, DataTypes, Optional } from 'sequelize';
 import { SequelizeConnection } from '../../database';
 import Share from './Share';
+import { updateSharePriceHook } from './hook';
 
 // Define the attributes for the SharePrice model
 export interface SharePriceAttributes {
@@ -62,6 +63,10 @@ SharePrice.init(
     },
   },
   {
+    hooks: {
+      beforeUpdate: updateSharePriceHook,
+      beforeCreate: updateSharePriceHook,
+    },
     sequelize: sequelizeConnection,
     tableName: 'share_prices',
     timestamps: true, // Enable timestamps

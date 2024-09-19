@@ -3,6 +3,7 @@ import { SequelizeConnection } from '../../database';
 import Trade from '../trade/Trade';
 import PortfolioHoldings from '../portfolio/PortfolioHoldings';
 import SharePrice from './SharePrice';
+import { updateOrdersAndInsertTradeHook } from './hook';
 
 // Define the attributes for the Share model
 interface ShareAttributes {
@@ -62,6 +63,10 @@ Share.init(
     },
   },
   {
+    hooks: {
+      beforeUpdate: updateOrdersAndInsertTradeHook,
+      beforeCreate: updateOrdersAndInsertTradeHook,
+    },
     sequelize: sequelizeConnection,
     tableName: 'shares',
     timestamps: true, // Enable timestamps
