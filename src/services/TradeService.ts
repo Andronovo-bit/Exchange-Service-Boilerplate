@@ -73,7 +73,7 @@ class TradeService extends BaseService<Trade, TradeAttributes, TradeCreationAttr
     const portfolioId = portfolio.portfolio_id;
 
     //check enough shares
-    const shares = await this.portfolioRepository.findPortfolioHoldingsByPortfolioAndShareId(userId, share_id);
+    const shares = await this.portfolioRepository.findPortfolioHoldingsByPortfolioAndShareId(portfolioId, share_id);
     const totalShares = shares?.quantity || 0;
     if (totalShares < quantity) throw new Error('Insufficient shares');
 

@@ -21,11 +21,8 @@ class TransactionService extends BaseService<Transaction, TransactionAttributes,
    */
   public async deposit(userId: number, transaction: TransactionCreationAttributes): Promise<Transaction> {
     const user = await this.userRepository.findByPk(userId);
+    
     if (!user) throw new Error('User not found');
-
-    // Increase the balance
-    user.balance += transaction.amount;
-    await user.save();
 
     transaction.transaction_type = 'DEPOSIT';
     transaction.user_id = userId;
@@ -44,10 +41,6 @@ class TransactionService extends BaseService<Transaction, TransactionAttributes,
 
     // Check if the user has enough balance
     if (user.balance < amount) throw new Error('Insufficient balance');
-
-    // Decrease the balance
-    user.balance -= amount;
-    await user.save();
 
     // Record the transaction
     const transaction: TransactionCreationAttributes = {

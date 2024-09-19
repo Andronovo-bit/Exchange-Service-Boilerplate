@@ -31,7 +31,7 @@ class PortfolioService extends BaseService<Portfolio, PortfolioAttributes, Portf
       throw new Error('User already has a portfolio.');
     }
 
-    const data: PortfolioCreationAttributes = { user_id: userId };
+    const data: PortfolioCreationAttributes = { user_id: userId, balance: 0 };
     return super.create(data);
   }
 
@@ -61,7 +61,7 @@ class PortfolioService extends BaseService<Portfolio, PortfolioAttributes, Portf
     if (!user) {
       throw new Error('User not found.');
     }
-    const portfolio = await this.portfolioRepository.findPortfolioHoldingsByShareId(userId, shareId);
+    const portfolio = await this.portfolioRepository.findPortfolioHoldingsByUserAndShareId(userId, shareId);
     if (!portfolio) {
       throw new Error('Portfolio not found.');
     }
