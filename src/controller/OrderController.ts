@@ -3,7 +3,7 @@ import { asyncHandler } from '../middleware/AsyncHandler';
 import OrderService from '../services/OrderService';
 import { inject, injectable } from 'inversify';
 import { success, error } from '../middleware/ResponseHandler';
-import { OrderCreationAttributes } from '../models/order/Order';
+import { CreateOrderRequestBody } from '../models/order/Order';
 
 @injectable()
 export class OrderController {
@@ -22,7 +22,7 @@ export class OrderController {
       return error(res, 400, 'INVALID_USER_ID', 'Invalid user ID');
     }
 
-    const data: OrderCreationAttributes = req.body;
+    const data: CreateOrderRequestBody = req.body;
     const order = await this.orderService.createOrder(userId, data);
     return success(res, 201, order);
   });

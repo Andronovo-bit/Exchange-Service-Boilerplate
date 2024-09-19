@@ -3,6 +3,7 @@ import { asyncHandler } from '../middleware/AsyncHandler';
 import TradeService from '../services/TradeService';
 import { inject, injectable } from 'inversify';
 import { success, error } from '../middleware/ResponseHandler';
+import { TradeCreationRequest } from '../models/trade/Trade';
 
 @injectable()
 export class TradeController {
@@ -21,12 +22,12 @@ export class TradeController {
       return error(res, 400, 'INVALID_USER_ID', 'Invalid user ID');
     }
 
-    const { shareId, quantity } = req.body;
-    if (!shareId || typeof quantity !== 'number' || quantity <= 0) {
+    const data: TradeCreationRequest = req.body;
+    if (!data.share_id || typeof data.quantity !== 'number' || data.quantity <= 0) {
       return error(res, 400, 'INVALID_INPUT', 'Invalid input parameters');
     }
 
-    const trade = await this.tradeService.buyMarket(userId, shareId, quantity);
+    const trade = await this.tradeService.buyMarket(userId, data);
     return success(res, 200, trade);
   });
 
@@ -43,12 +44,12 @@ export class TradeController {
       return error(res, 400, 'INVALID_USER_ID', 'Invalid user ID');
     }
 
-    const { shareId, quantity } = req.body;
-    if (!shareId || typeof quantity !== 'number' || quantity <= 0) {
+    const data: TradeCreationRequest = req.body;
+    if (!data.share_id || typeof data.quantity !== 'number' || data.quantity <= 0) {
       return error(res, 400, 'INVALID_INPUT', 'Invalid input parameters');
     }
 
-    const trade = await this.tradeService.sellMarket(userId, shareId, quantity);
+    const trade = await this.tradeService.sellMarket(userId, data);
     return success(res, 200, trade);
   });
 

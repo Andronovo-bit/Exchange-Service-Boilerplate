@@ -8,9 +8,7 @@ import User from '../models/user/User';
 
 @injectable()
 class PortfolioRepository extends GenericRepository<Portfolio, PortfolioAttributes, PortfolioCreationAttributes> {
-  constructor(
-    @inject('SequelizeInstance') private sequelizeInstance: Sequelize
-  ) {
+  constructor(@inject('SequelizeInstance') private sequelizeInstance: Sequelize) {
     super(Portfolio);
   }
 
@@ -31,11 +29,7 @@ class PortfolioRepository extends GenericRepository<Portfolio, PortfolioAttribut
    * @returns A promise that resolves to an array of portfolio holdings.
    */
   public async findPortfolioHoldingsByUserId(userId: number): Promise<PortfolioHoldings[]> {
-    const portfolio = await Portfolio.findOne({
-      where: { user_id: userId },
-      include: User,
-      attributes: ['portfolio_id'],
-    });
+    const portfolio = await this.findPortfolioByUserId(userId);
 
     if (!portfolio) {
       return [];
@@ -43,7 +37,7 @@ class PortfolioRepository extends GenericRepository<Portfolio, PortfolioAttribut
 
     return PortfolioHoldings.findAll({
       where: { portfolio_id: portfolio.portfolio_id },
-      attributes: ['portfolio_id', 'share_id','total_value', 'quantity', 'average_price'],
+      attributes: ['portfolio_id', 'share_id', 'total_value', 'quantity', 'average_price'],
       include: [
         {
           model: Share,
@@ -69,11 +63,8 @@ class PortfolioRepository extends GenericRepository<Portfolio, PortfolioAttribut
    * @param shareId - The ID of the share.
    * @returns A promise that resolves to the portfolio holding or null if not found.
    */
-  public async findPortfolioHoldingsByShareId(userId: number, shareId: number): Promise<PortfolioHoldings | null> {
-    const portfolio = await Portfolio.findOne({
-      where: { user_id: userId },
-      attributes: ['portfolio_id'],
-    });
+  public async findPortfolioHoldingsByUserAndShareId(userId: number, shareId: number): Promise<PortfolioHoldings | null> {
+    const portfolio = await this.findPortfolioByUserId(userId);
 
     if (!portfolio) {
       return null;
@@ -82,6 +73,18 @@ class PortfolioRepository extends GenericRepository<Portfolio, PortfolioAttribut
     return PortfolioHoldings.findOne({
       where: { portfolio_id: portfolio.portfolio_id, share_id: shareId },
       include: Share,
+    });
+  }
+
+  /**
+   * Get the portfolio holding by portfolio ID and share ID.
+   * @param portfolioId - The ID of the portfolio.
+   * @param shareId - The ID of the share.
+   * @returns A promise that resolves to the portfolio holding or null if not found.
+   */
+  public async findPortfolioHoldingsByPortfolioAndShareId(portfolioId: number, shareId: number): Promise<PortfolioHoldings | null> {
+    return PortfolioHoldings.findOne({
+      where: { portfolio_id: portfolioId, share_id: shareId },
     });
   }
 }

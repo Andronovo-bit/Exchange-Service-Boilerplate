@@ -1,7 +1,7 @@
 import { inject, injectable } from 'inversify';
 import OrderRepository from '../repositories/OrderRepository';
 import PortfolioRepository from '../repositories/PortfolioRepository';
-import Order, { OrderAttributes, OrderCreationAttributes } from '../models/order/Order';
+import Order, { CreateOrderRequestBody, OrderAttributes, OrderCreationAttributes } from '../models/order/Order';
 import { BaseService } from './BaseService';
 
 @injectable()
@@ -19,7 +19,7 @@ class OrderService extends BaseService<Order, OrderAttributes, OrderCreationAttr
    * @param data - The order creation attributes.
    * @returns A promise that resolves to the created order.
    */
-  public async createOrder(userId: number, data: OrderCreationAttributes): Promise<Order> {
+  public async createOrder(userId: number, data: CreateOrderRequestBody): Promise<Order> {
     const portfolio = await this.portfolioRepository.findPortfolioByUserId(userId);
     if (!portfolio) {
       throw new Error('Portfolio not found');
@@ -35,7 +35,15 @@ class OrderService extends BaseService<Order, OrderAttributes, OrderCreationAttr
       throw new Error('Portfolio ID does not match the user portfolio ID');
     }
 
-    return this.orderRepository.create(data);
+    const order: OrderCreationAttributes = {
+      ...data,
+      portfolio_id: portfolioId,
+      status: 'PENDING',
+      order_date: new Date(),
+      remaining_quantity: data.quantity, // Add remaining_quantity
+    };
+    
+    return this.orderRepository.create(order);
   }
 
   /**

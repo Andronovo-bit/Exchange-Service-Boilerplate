@@ -19,22 +19,16 @@ class TransactionService extends BaseService<Transaction, TransactionAttributes,
    * @param amount - The amount to deposit.
    * @returns A promise that resolves to the created transaction.
    */
-  public async deposit(userId: number, amount: number): Promise<Transaction> {
+  public async deposit(userId: number, transaction: TransactionCreationAttributes): Promise<Transaction> {
     const user = await this.userRepository.findByPk(userId);
     if (!user) throw new Error('User not found');
 
     // Increase the balance
-    user.balance += amount;
+    user.balance += transaction.amount;
     await user.save();
 
-    // Record the transaction
-    const transaction: TransactionCreationAttributes = {
-      user_id: userId,
-      transaction_type: 'DEPOSIT',
-      amount,
-      description: null,
-    };
-
+    transaction.transaction_type = 'DEPOSIT';
+    transaction.user_id = userId;
     return this.transactionRepository.create(transaction);
   }
 

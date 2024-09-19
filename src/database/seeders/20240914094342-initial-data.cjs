@@ -434,6 +434,7 @@ module.exports = {
     const transaction = await queryInterface.sequelize.transaction();
     try {
       // Rollback inserted data in the correct order
+      await queryInterface.bulkDelete('orders', null, { ...options, transaction });
       await queryInterface.bulkDelete('portfolio_holdings', null, {
         ...options,
         transaction,

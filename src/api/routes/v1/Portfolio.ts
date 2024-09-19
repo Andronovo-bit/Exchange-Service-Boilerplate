@@ -8,7 +8,7 @@ const portfolioController = container.get<PortfolioController>(PortfolioControll
 export default (app: Router): void => {
   app.use('/v1/portfolio', router);
 
-  router.post('/create:userId', portfolioController.createPortfolio);
+  router.post('/create/:userId', portfolioController.createPortfolio);
   router.get('/holdings/:userId', portfolioController.getPortfolioHoldings);
   router.get('/holdings/share', portfolioController.getPortfolioHoldingsByShare);
 };

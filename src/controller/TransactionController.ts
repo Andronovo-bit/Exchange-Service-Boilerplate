@@ -3,6 +3,7 @@ import { asyncHandler } from '../middleware/AsyncHandler';
 import TransactionService from '../services/TransactionService';
 import { inject, injectable } from 'inversify';
 import { success, error } from '../middleware/ResponseHandler';
+import { TransactionCreationAttributes } from '../models/transaction/Transaction';
 
 @injectable()
 export class TransactionController {
@@ -20,11 +21,11 @@ export class TransactionController {
     if (isNaN(userId)) {
       return error(res, 400, 'INVALID_USER_ID', 'Invalid user ID');
     }
-    const { amount } = req.body;
-    if (typeof amount !== 'number' || amount <= 0) {
+    const data: TransactionCreationAttributes = req.body;
+    if (typeof data.amount !== 'number' || data.amount <= 0) {
       return error(res, 400, 'INVALID_AMOUNT', 'Amount must be a positive number');
     }
-    const transaction = await this.transactionService.deposit(userId, amount);
+    const transaction = await this.transactionService.deposit(userId,data);
     return success(res, 200, transaction);
   });
 

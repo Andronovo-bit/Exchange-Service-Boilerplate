@@ -5,9 +5,7 @@ import SharePrice, { SharePriceAttributes, SharePriceCreationAttributes } from '
 
 @injectable()
 class PriceService extends BaseService<SharePrice, SharePriceAttributes, SharePriceCreationAttributes> {
-  constructor(
-    @inject(PriceRepository) private priceRepository: PriceRepository
-  ) {
+  constructor(@inject(PriceRepository) private priceRepository: PriceRepository) {
     super(priceRepository);
   }
 
@@ -31,11 +29,14 @@ class PriceService extends BaseService<SharePrice, SharePriceAttributes, SharePr
    * @returns A promise that resolves to the updated share price.
    */
   public async updateSharePrice(shareId: number, newPrice: number): Promise<SharePrice> {
-    const updatedPrice = await this.priceRepository.create({
+    const sharePrice: SharePriceCreationAttributes = {
       share_id: shareId,
       price: newPrice,
       recorded_at: new Date(),
-    });
+    };
+
+    const updatedPrice = await this.priceRepository.create(sharePrice);
+
     return updatedPrice;
   }
 }
