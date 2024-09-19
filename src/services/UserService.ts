@@ -6,6 +6,7 @@ import User, { UserAttributes, UserCreationAttributes } from '../models/user/Use
 import { inject, injectable } from 'inversify';
 import PortfolioRepository from '../repositories/PortfolioRepository';
 import PortfolioHoldings from '../models/portfolio/PortfolioHoldings';
+import { NotFoundError } from '../utils/errors';
 
 @injectable()
 class UserService extends BaseService<User, UserAttributes, UserCreationAttributes> {
@@ -38,7 +39,7 @@ class UserService extends BaseService<User, UserAttributes, UserCreationAttribut
     const portfolio = await this.portfolioRepository.findPortfolioHoldingsByUserId(userId);
 
     if (!portfolio.length) {
-      throw new Error('No portfolio found for this user.');
+      throw new NotFoundError('No portfolio found for this user.');
     }
     return portfolio;
   }
@@ -51,7 +52,7 @@ class UserService extends BaseService<User, UserAttributes, UserCreationAttribut
   public async getUserBalance(userId: number): Promise<{ balance: number }> {
     const user = await this.userRepository.findByPk(userId);
     if (!user) {
-      throw new Error('User not found.');
+      throw new NotFoundError('User not found.');
     }
     return { balance: user.balance };
   }

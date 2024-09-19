@@ -4,6 +4,7 @@ import UserRepository from '../repositories/UserRepository';
 import Portfolio, { PortfolioAttributes, PortfolioCreationAttributes } from '../models/portfolio/Portfolio';
 import { BaseService } from './BaseService';
 import PortfolioHoldings from '../models/portfolio/PortfolioHoldings';
+import { NotFoundError } from '../utils/errors';
 
 @injectable()
 class PortfolioService extends BaseService<Portfolio, PortfolioAttributes, PortfolioCreationAttributes> {
@@ -23,7 +24,7 @@ class PortfolioService extends BaseService<Portfolio, PortfolioAttributes, Portf
   public async createPortfolio(userId: number): Promise<Portfolio> {
     const user = await this.userRepository.findByPk(userId);
     if (!user) {
-      throw new Error('User not found.');
+      throw new NotFoundError('User not found.');
     }
 
     const existingPortfolio = await this.portfolioRepository.findPortfolioByUserId(userId);
@@ -43,7 +44,7 @@ class PortfolioService extends BaseService<Portfolio, PortfolioAttributes, Portf
   public async getUserPortfolioHoldings(userId: number): Promise<PortfolioHoldings[]> {
     const portfolio = await this.portfolioRepository.findPortfolioHoldingsByUserId(userId);
     if (!portfolio.length) {
-      throw new Error('No portfolio found for this user.');
+      throw new NotFoundError('No portfolio found for this user.');
     }
     return portfolio;
   }
@@ -59,11 +60,11 @@ class PortfolioService extends BaseService<Portfolio, PortfolioAttributes, Portf
   public async getPortfolioHoldingsByShareId(userId: number, shareId: number): Promise<PortfolioHoldings> {
     const user = await this.userRepository.findByPk(userId);
     if (!user) {
-      throw new Error('User not found.');
+      throw new NotFoundError('User not found.');
     }
     const portfolio = await this.portfolioRepository.findPortfolioHoldingsByUserAndShareId(userId, shareId);
     if (!portfolio) {
-      throw new Error('Portfolio not found.');
+      throw new NotFoundError('Portfolio not found.');
     }
     return portfolio;
   }

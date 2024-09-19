@@ -2,6 +2,7 @@ import Share from '../share/Share'; // Adjust this import to match your project 
 import Order from '../order/Order';
 import { Op } from 'sequelize';
 import SharePrice from '../share/SharePrice';
+import { NotFoundError } from '../../utils/errors';
 
 /**
  * Hook to update the share price when an order is processed.
@@ -11,7 +12,7 @@ export const updateSharePriceHook = async (order: Order): Promise<void> => {
   const share = await Share.findOne({ where: { share_id: order.share_id } });
 
   if (!share) {
-    throw new Error(`Share with ID ${order.share_id} not found`);
+    throw new NotFoundError(`Share with ID ${order.share_id} not found`);
   }
 
   const pendingOppositeOrders = await findPendingOppositeOrders(order);

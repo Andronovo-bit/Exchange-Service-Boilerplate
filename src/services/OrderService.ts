@@ -3,6 +3,7 @@ import OrderRepository from '../repositories/OrderRepository';
 import PortfolioRepository from '../repositories/PortfolioRepository';
 import Order, { CreateOrderRequestBody, OrderAttributes, OrderCreationAttributes } from '../models/order/Order';
 import { BaseService } from './BaseService';
+import { NotFoundError } from '../utils/errors';
 
 @injectable()
 class OrderService extends BaseService<Order, OrderAttributes, OrderCreationAttributes> {
@@ -22,13 +23,13 @@ class OrderService extends BaseService<Order, OrderAttributes, OrderCreationAttr
   public async createOrder(userId: number, data: CreateOrderRequestBody): Promise<Order> {
     const portfolio = await this.portfolioRepository.findPortfolioByUserId(userId);
     if (!portfolio) {
-      throw new Error('Portfolio not found');
+      throw new NotFoundError('Portfolio not found');
     }
 
     const { portfolio_id: portfolioId } = portfolio;
 
     if (!portfolioId) {
-      throw new Error('Portfolio for the given share_id not found');
+      throw new NotFoundError('Portfolio for the given share_id not found');
     }
 
     if (data.portfolio_id !== portfolioId) {

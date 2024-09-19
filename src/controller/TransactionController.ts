@@ -4,6 +4,7 @@ import TransactionService from '../services/TransactionService';
 import { inject, injectable } from 'inversify';
 import { success, error } from '../middleware/ResponseHandler';
 import { TransactionCreationAttributes } from '../models/transaction/Transaction';
+import ValidationError from 'sequelize/types/errors/validation-error';
 
 @injectable()
 export class TransactionController {

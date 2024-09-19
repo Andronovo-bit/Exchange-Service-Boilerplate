@@ -3,6 +3,7 @@ import TransactionRepository from '../repositories/TransactionRepository';
 import UserRepository from '../repositories/UserRepository';
 import { BaseService } from './BaseService';
 import Transaction, { TransactionAttributes, TransactionCreationAttributes } from '../models/transaction/Transaction';
+import { NotFoundError } from '../utils/errors';
 
 @injectable()
 class TransactionService extends BaseService<Transaction, TransactionAttributes, TransactionCreationAttributes> {
@@ -21,8 +22,8 @@ class TransactionService extends BaseService<Transaction, TransactionAttributes,
    */
   public async deposit(userId: number, transaction: TransactionCreationAttributes): Promise<Transaction> {
     const user = await this.userRepository.findByPk(userId);
-    
-    if (!user) throw new Error('User not found');
+
+    if (!user) throw new NotFoundError('User not found');
 
     transaction.transaction_type = 'DEPOSIT';
     transaction.user_id = userId;
@@ -37,7 +38,7 @@ class TransactionService extends BaseService<Transaction, TransactionAttributes,
    */
   public async withdraw(userId: number, amount: number): Promise<Transaction> {
     const user = await this.userRepository.findByPk(userId);
-    if (!user) throw new Error('User not found');
+    if (!user) throw new NotFoundError('User not found');
 
     // Check if the user has enough balance
     if (user.balance < amount) throw new Error('Insufficient balance');

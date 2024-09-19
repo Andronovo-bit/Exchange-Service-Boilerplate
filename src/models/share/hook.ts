@@ -6,6 +6,7 @@ import SharePrice from '../share/SharePrice';
 import sequelize from '../../config/database/sequelize';
 import Portfolio from '../portfolio/Portfolio';
 import PortfolioHoldings from '../portfolio/PortfolioHoldings';
+import { NotFoundError } from '../../utils/errors';
 
 /**
  * Hook to be executed when `latest_price` in `Share` is updated.
@@ -191,7 +192,7 @@ export const updateSharePriceHook = async (sharePrice: SharePrice): Promise<void
   const share = await Share.findOne({ where: { share_id: shareId } });
 
   if (!share) {
-    throw new Error(`Share with ID ${shareId} not found`);
+    throw new NotFoundError(`Share with ID ${shareId} not found`);
   }
 
   const previousPrice = share.latest_price;

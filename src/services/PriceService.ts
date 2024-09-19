@@ -2,6 +2,7 @@ import { inject, injectable } from 'inversify';
 import PriceRepository from '../repositories/PriceRepository';
 import { BaseService } from './BaseService';
 import SharePrice, { SharePriceAttributes, SharePriceCreationAttributes } from '../models/share/SharePrice';
+import { NotFoundError } from '../utils/errors';
 
 @injectable()
 class PriceService extends BaseService<SharePrice, SharePriceAttributes, SharePriceCreationAttributes> {
@@ -17,7 +18,7 @@ class PriceService extends BaseService<SharePrice, SharePriceAttributes, SharePr
   public async getSharePrice(shareId: number): Promise<SharePrice> {
     const latestPrice = await this.priceRepository.findLatestPrice(shareId);
     if (!latestPrice) {
-      throw new Error('Share price not found');
+      throw new NotFoundError('Share price not found');
     }
     return latestPrice;
   }

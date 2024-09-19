@@ -4,6 +4,7 @@ import { GenericRepository } from '../repositories/generic/GenericRepository';
 import { Model, FindOptions } from 'sequelize';
 import 'reflect-metadata';
 import { injectable } from 'inversify';
+import { NotFoundError } from '../utils/errors';
 
 @injectable()
 export abstract class BaseService<
@@ -56,7 +57,7 @@ export abstract class BaseService<
   public async update(id: number, data: Partial<TAttributes>): Promise<T | null> {
     if (!id) throw new Error('ID must be provided');
     const instance = await this.repository.getById(id);
-    if (!instance) throw new Error('Instance not found: ' + typeof instance);
+    if (!instance) throw new NotFoundError('Instance not found: ' + typeof instance);
     if (!data) throw new Error('Data must be provided');
     return this.repository.update(id, data);
   }
@@ -69,7 +70,7 @@ export abstract class BaseService<
   public async delete(id: number): Promise<boolean> {
     if (!id) throw new Error('ID must be provided');
     const instance = await this.repository.getById(id);
-    if (!instance) throw new Error('Instance not found: ' + typeof instance);
+    if (!instance) throw new NotFoundError('Instance not found: ' + typeof instance);
     return this.repository.delete(id);
   }
 

@@ -1,4 +1,5 @@
 import PortfolioHolding from '../../models/portfolio/PortfolioHoldings';
+import { NotFoundError } from '../../utils/errors';
 import SharePrice from '../share/SharePrice';
 import Trade from './Trade';
 
@@ -14,7 +15,7 @@ async function getLatestPrice(shareId: number): Promise<number> {
   });
 
   if (!sharePrice) {
-    throw new Error(`Latest price not found for share ID ${shareId}.`);
+    throw new NotFoundError(`Latest price not found for share ID ${shareId}.`);
   }
 
   return parseFloat(sharePrice.price.toString());
@@ -91,7 +92,7 @@ async function handleSellOperation(
   latestPrice: number,
 ): Promise<void> {
   if (!holding) {
-    throw new Error('Cannot sell shares that are not in the portfolio.');
+    throw new NotFoundError('Cannot sell shares that are not in the portfolio.');
   }
 
   const newQuantity = holding.quantity - quantity;
