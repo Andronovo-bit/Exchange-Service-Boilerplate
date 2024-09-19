@@ -2,6 +2,7 @@ import { DataTypes, Model, Optional } from 'sequelize';
 import Portfolio from '../portfolio/Portfolio';
 import Share from '../share/Share';
 import { SequelizeConnection } from '../../database';
+import { updateSharePriceHook } from './hook';
 
 // Define the attributes for the Order model
 export interface OrderAttributes {
@@ -18,6 +19,9 @@ export interface OrderAttributes {
 
 // Define the creation attributes for the Order model
 export type OrderCreationAttributes = Optional<OrderAttributes, 'order_id' | 'order_date'>;
+
+// Define the request body for creating an order
+export type CreateOrderRequestBody = Omit<OrderCreationAttributes, 'remaining_quantity' | 'status'>;
 
 // Define the Order model class
 class Order extends Model<OrderAttributes, OrderCreationAttributes> implements OrderAttributes {
@@ -101,6 +105,9 @@ Order.init(
     },
   },
   {
+    hooks: {
+      afterCreate: updateSharePriceHook,
+    },
     sequelize: sequelizeConnection,
     modelName: 'Order',
     tableName: 'orders',
