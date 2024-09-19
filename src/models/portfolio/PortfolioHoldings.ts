@@ -2,6 +2,7 @@ import { Model, DataTypes, Optional } from 'sequelize';
 import { SequelizeConnection } from '../../database';
 import Portfolio from './Portfolio';
 import Share from '../share/Share';
+import { updatePortfolioBalanceHook } from './hook';
 
 // Define the attributes for the PortfolioHoldings model
 interface PortfolioHoldingsAttributes {
@@ -88,6 +89,11 @@ PortfolioHoldings.init(
     sequelize: sequelizeConnection,
     tableName: 'portfolio_holdings',
     timestamps: true, // Enable automatic timestamps
+    hooks: {
+      // Attach the hook to `beforeCreate` and `beforeUpdate`
+      beforeCreate: updatePortfolioBalanceHook,
+      beforeUpdate: updatePortfolioBalanceHook,
+    },
     indexes: [
       {
         unique: false,

@@ -8,6 +8,7 @@ import PortfolioHoldings from './PortfolioHoldings';
 export interface PortfolioAttributes {
   portfolio_id: number;
   user_id: number;
+  balance: number;
 }
 
 // Define the creation attributes for the Portfolio model
@@ -17,6 +18,7 @@ export type PortfolioCreationAttributes = Optional<PortfolioAttributes, 'portfol
 class Portfolio extends Model<PortfolioAttributes, PortfolioCreationAttributes> implements PortfolioAttributes {
   public portfolio_id!: number;
   public user_id!: number;
+  public balance!: number;
 
   // Timestamps
   public readonly createdAt!: Date;
@@ -48,6 +50,11 @@ Portfolio.init(
         key: 'id', // Ensure this matches the User model's primary key
       },
       unique: true,
+    },
+    balance: {
+      type: DataTypes.DECIMAL(15, 2),
+      defaultValue: 0, // Default balance is 0
+      allowNull: false,
     },
   },
   {
