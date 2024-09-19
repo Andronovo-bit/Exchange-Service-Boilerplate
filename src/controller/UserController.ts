@@ -1,9 +1,9 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 import { inject, injectable } from 'inversify';
 import UserService from '../services/UserService';
 import { asyncHandler } from '../middleware/AsyncHandler';
 import { success, error } from '../middleware/ResponseHandler';
-import { UserAttributes } from '../models/user/User';
+import type { UserAttributes } from '../models/user/User';
 
 @injectable()
 export class UserController {

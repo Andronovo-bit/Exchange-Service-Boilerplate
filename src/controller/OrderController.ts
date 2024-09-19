@@ -1,9 +1,9 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 import { asyncHandler } from '../middleware/AsyncHandler';
 import OrderService from '../services/OrderService';
 import { inject, injectable } from 'inversify';
 import { success, error } from '../middleware/ResponseHandler';
-import { CreateOrderRequestBody } from '../models/order/Order';
+import type { CreateOrderRequestBody } from '../models/order/Order';
 
 @injectable()
 export class OrderController {

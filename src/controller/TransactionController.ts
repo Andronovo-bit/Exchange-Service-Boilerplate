@@ -1,10 +1,9 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 import { asyncHandler } from '../middleware/AsyncHandler';
 import TransactionService from '../services/TransactionService';
 import { inject, injectable } from 'inversify';
 import { success, error } from '../middleware/ResponseHandler';
-import { TransactionCreationAttributes } from '../models/transaction/Transaction';
-import ValidationError from 'sequelize/types/errors/validation-error';
+import type { TransactionCreationAttributes } from '../models/transaction/Transaction';
 
 @injectable()
 export class TransactionController {

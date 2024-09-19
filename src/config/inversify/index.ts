@@ -14,7 +14,6 @@ import PortfolioService from '../../services/PortfolioService';
 import OrderService from '../../services/OrderService';
 import PriceService from '../../services/PriceService';
 import { BaseService } from '../../services/BaseService';
-import { object } from 'joi';
 import { Sequelize } from 'sequelize';
 import { SequelizeConnection } from '../database/sequelizeInstance';
 import { PortfolioController } from '../../controller/PortfolioController';

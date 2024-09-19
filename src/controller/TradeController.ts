@@ -1,9 +1,9 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 import { asyncHandler } from '../middleware/AsyncHandler';
 import TradeService from '../services/TradeService';
 import { inject, injectable } from 'inversify';
 import { success, error } from '../middleware/ResponseHandler';
-import { TradeCreationRequest } from '../models/trade/Trade';
+import type { TradeCreationRequest } from '../models/trade/Trade';
 
 @injectable()
 export class TradeController {

@@ -1,7 +1,7 @@
 // src/database/initModels.ts
 import sequelize from './sequelize';
 import syncOrderedModels from '../../models';
-import { Model, ModelStatic } from 'sequelize';
+import type { Model, ModelStatic } from 'sequelize';
 import config from '../config';
 
 type SequelizeModels = { [key: string]: ModelStatic<Model> };

@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 import { asyncHandler } from '../middleware/AsyncHandler';
 import PriceService from '../services/PriceService';
 import { inject, injectable } from 'inversify';
