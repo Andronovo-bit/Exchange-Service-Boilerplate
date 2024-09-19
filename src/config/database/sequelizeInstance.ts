@@ -1,4 +1,5 @@
 import { Dialect, Sequelize } from 'sequelize';
+import config from '../config';
 
 /**
  * The Singleton class defines the `getInstance` method that lets clients access
@@ -14,18 +15,18 @@ export class SequelizeConnection {
    */
   private constructor() {
     // Information needed to initialize database connection
-    const dbName = process.env.DB_NAME as string;
-    const dbUser = process.env.DB_USER as string;
-    const dbHost = process.env.DB_HOST;
-    const dbDriver = process.env.DB_DRIVER as Dialect;
-    const dbPassword = process.env.DB_PASS;
-    const dbPort = process.env.DB_PORT;
+    const dbName = config.database.name as string;
+    const dbUser = config.database.username as string;
+    const dbHost = config.database.host as string;
+    const dbDriver = config.database.dialect as Dialect;
+    const dbPassword = config.database.password as string;
+    const dbPort = config.database.port as number;
 
     // Initialize connection
     SequelizeConnection.instance = new Sequelize(dbName, dbUser, dbPassword, {
       host: dbHost,
       dialect: dbDriver,
-      port: parseInt(dbPort as string),
+      port: dbPort,
       logging: false,
     });
 
