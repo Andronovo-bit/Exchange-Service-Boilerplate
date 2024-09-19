@@ -5,6 +5,7 @@ import { errorHandler } from '../middleware/ErrorHandler';
 import morgan from 'morgan';
 import compression from 'compression';
 import helmet from 'helmet';
+import { apiLimiter } from '../middleware/RateLimiter';
 
 export default ({ app }: { app: express.Application }) => {
   /**
@@ -36,6 +37,8 @@ export default ({ app }: { app: express.Application }) => {
   }
   app.use(compression());
   app.use(helmet());
+  // Apply rate limiting to all routes
+  app.use(apiLimiter);
   // Load API routes
   app.use(config.api.prefix, routes());
 
