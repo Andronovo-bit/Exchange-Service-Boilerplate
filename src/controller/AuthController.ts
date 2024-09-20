@@ -19,8 +19,8 @@ export class AuthController {
     const { email, password } = req.body;
 
     try {
-      const { token } = await this.authService.login(email, password);
-      return success(res, 200, { token }, 'Login successful');
+      const { token, user } = await this.authService.login(email, password);
+      return success(res, 200, { userId:user.id, token: token }, 'Login successful');
     } catch (err:any) {
       return error(res, 401, 'INVALID_CREDENTIALS', err.message);
     }
@@ -34,6 +34,6 @@ export class AuthController {
 
     const data: UserCreationAttributes = req.body;
     const user = await this.authService.register(data);
-    return success(res, 201, user, 'User created successfully');
+    return success(res, 201, {email: user.email, username: user.username}, 'User created successfully');
   });
 }
