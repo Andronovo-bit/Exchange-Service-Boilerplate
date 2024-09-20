@@ -21,6 +21,8 @@ import { TradeController } from '../../controller/TradeController';
 import { TransactionController } from '../../controller/TransactionController';
 import OrderController from '../../controller/OrderController';
 import { PriceController } from '../../controller/PriceController';
+import AuthService from '../../services/AuthService';
+import { AuthController } from '../../controller/AuthController';
 
 const container = new Container({ autoBindInjectable: true });
 
@@ -34,6 +36,7 @@ container.bind<PriceRepository>(PriceRepository).to(PriceRepository);
 container.bind<TradeRepository>(TradeRepository).to(TradeRepository);
 
 // Determine the services
+container.bind<AuthService>(AuthService).to(AuthService);
 container.bind<UserService>(UserService).to(UserService);
 container.bind<TransactionService>(TransactionService).to(TransactionService);
 container.bind<TradeService>(TradeService).to(TradeService);
@@ -44,6 +47,7 @@ container.bind<BaseService<any, any, any>>(BaseService);
 
 container.bind<Sequelize>('SequelizeInstance').toConstantValue(SequelizeConnection.getInstance());
 // Determine the controllers
+container.bind<AuthController>(AuthController).to(AuthController);
 container.bind<UserController>(UserController).to(UserController);
 container.bind<PortfolioController>(PortfolioController).to(PortfolioController);
 container.bind<TradeController>(TradeController).to(TradeController);

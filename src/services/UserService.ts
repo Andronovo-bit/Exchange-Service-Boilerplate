@@ -5,8 +5,8 @@ import UserRepository from '../repositories/UserRepository';
 import User, { UserAttributes, UserCreationAttributes } from '../models/user/User';
 import { inject, injectable } from 'inversify';
 import PortfolioRepository from '../repositories/PortfolioRepository';
-import PortfolioHoldings from '../models/portfolio/PortfolioHoldings';
 import { NotFoundError } from '../utils/errors';
+import Portfolio from '../models/portfolio/Portfolio';
 
 @injectable()
 class UserService extends BaseService<User, UserAttributes, UserCreationAttributes> {
@@ -35,10 +35,10 @@ class UserService extends BaseService<User, UserAttributes, UserCreationAttribut
    * @param userId - The ID of the user.
    * @returns A promise that resolves to an array of portfolio holdings.
    */
-  public async getUserPortfolio(userId: number): Promise<PortfolioHoldings[]> {
-    const portfolio = await this.portfolioRepository.findPortfolioHoldingsByUserId(userId);
+  public async getUserPortfolio(userId: number): Promise<Portfolio> {
+    const portfolio = await this.portfolioRepository.findPortfolioByUserId(userId);
 
-    if (!portfolio.length) {
+    if (!portfolio) {
       throw new NotFoundError('No portfolio found for this user.');
     }
     return portfolio;
@@ -55,6 +55,15 @@ class UserService extends BaseService<User, UserAttributes, UserCreationAttribut
       throw new NotFoundError('User not found.');
     }
     return { balance: user.balance };
+  }
+
+  /**
+   * Get a user by email.
+   * @param email - The email of the user.
+   * @returns A promise that resolves to the user.
+   */
+  public async findByEmail(email: string): Promise<User | null> {
+    return this.userRepository.findByEmail(email);
   }
 
 }
