@@ -1,0 +1,531 @@
+{
+	"info": {
+		"_postman_id": "5e1e929f-83cd-45ca-8fdb-dff7ef8d8195",
+		"name": "Exchange",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10689835"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"user6@example.com\",\r\n    \"password\":\"Initial deposit\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7171/api/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7171",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"user6@example.com\",\r\n    \"password\":\"Initial deposit\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7171/api/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7171",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "User login and register"
+		},
+		{
+			"name": "Trade - Order",
+			"item": [
+				{
+					"name": "Trade Market Buy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"share_id\":1,\r\n    \"quantity\":5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7171/api/v1/trade/market/buy/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7171",
+							"path": [
+								"api",
+								"v1",
+								"trade",
+								"market",
+								"buy",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Trade Market Sell",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"share_id\":1,\r\n    \"quantity\":5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7171/api/v1/trade/market/sell/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7171",
+							"path": [
+								"api",
+								"v1",
+								"trade",
+								"market",
+								"sell",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Trade Limit Buy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"share_id\": 1,\r\n    \"portfolio_id\":6,\r\n    \"order_type\":\"BUY\",\r\n    \"quantity\": 3,\r\n    \"price\": 155\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7171/api/v1/order/create/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7171",
+							"path": [
+								"api",
+								"v1",
+								"order",
+								"create",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Trade Limit Sell",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"share_id\": 1,\r\n    \"portfolio_id\":1,\r\n    \"order_type\":\"SELL\",\r\n    \"quantity\": 5,\r\n    \"price\": 155\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7171/api/v1/order/create/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7171",
+							"path": [
+								"api",
+								"v1",
+								"order",
+								"create",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Limit Order",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"newPrice\":155\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7171/api/v1/price/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7171",
+							"path": [
+								"api",
+								"v1",
+								"price",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get My Trade or Order",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transaction",
+			"item": [
+				{
+					"name": "Deposit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\":\"100.00\",\r\n    \"description\":\"Initial deposit\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7171/api/v1/transaction/deposit/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7171",
+							"path": [
+								"api",
+								"v1",
+								"transaction",
+								"deposit",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Withdraw",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\":100.00\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7171/api/v1/transaction/withdraw/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7171",
+							"path": [
+								"api",
+								"v1",
+								"transaction",
+								"withdraw",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get User Balance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7171/api/v1/portfolio/holdings/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7171",
+							"path": [
+								"api",
+								"v1",
+								"portfolio",
+								"holdings",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"newPrice\":155\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7171/api/v1/price/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7171",
+							"path": [
+								"api",
+								"v1",
+								"price",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Portfolio",
+			"item": [
+				{
+					"name": "CreatePortfolio",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7171/api/v1/portfolio/create/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7171",
+							"path": [
+								"api",
+								"v1",
+								"portfolio",
+								"create",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Portfolio",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7171/api/v1/portfolio/holdings/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7171",
+							"path": [
+								"api",
+								"v1",
+								"portfolio",
+								"holdings",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get PortfolioHoldings By UserId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7171/api/v1/portfolio/holdings/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7171",
+							"path": [
+								"api",
+								"v1",
+								"portfolio",
+								"holdings",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SharePrice",
+			"item": [
+				{
+					"name": "Update Share Price",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"newPrice\":155\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7171/api/v1/price/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7171",
+							"path": [
+								"api",
+								"v1",
+								"price",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Shares",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get Share By Symbol",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTcyNjg2MDY5MywiZXhwIjoxNzI2OTQ3MDkzfQ.vQZOdumPwEk2kDROsK9wkOcq_uIv89D1J3_vH236CQw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7171/api/v1/price/share/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7171",
+							"path": [
+								"api",
+								"v1",
+								"price",
+								"share",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
