@@ -1,14 +1,25 @@
-import PortfolioHoldings  from './PortfolioHoldings'; // Import the PortfolioHoldings model
-import Portfolio  from './Portfolio'; // Import the Portfolio model
+import PortfolioHoldings from './PortfolioHoldings'; // Import the PortfolioHoldings model
+import Portfolio from './Portfolio'; // Import the Portfolio model
+import { NotFoundError } from '../../utils/errors';
 
 // Hook function to update Portfolio balance based on PortfolioHoldings changes
 export const updatePortfolioBalanceHook = async (portfolioHoldings: PortfolioHoldings) => {
-  const portfolioId = portfolioHoldings.portfolio_id;
+  let balance = 0;
 
-  // Calculate the sum of total_value for all holdings in this portfolio
-  const totalValue = await portfolioHoldings.getDataValue('total_value');
+  const allPortfolioHoldings:any = await Portfolio.findOne({
+    where: { portfolio_id: portfolioHoldings.portfolio_id },
+    include: [PortfolioHoldings],
+  });
 
-  // Update the Portfolio balance with the new total value
-  await Portfolio.update({ balance: totalValue }, { where: { portfolio_id: portfolioId } });
+  if (!allPortfolioHoldings) {
+    throw new NotFoundError(`Portfolio not found`);
+  }
 
+  allPortfolioHoldings.PortfolioHoldings.forEach((holding: PortfolioHoldings) => {
+    balance += holding.quantity * holding.average_price;
+  });
+
+  allPortfolioHoldings.balance = balance;
+
+  await allPortfolioHoldings.save();
 };

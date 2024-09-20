@@ -91,8 +91,8 @@ PortfolioHoldings.init(
     timestamps: true, // Enable automatic timestamps
     hooks: {
       // Attach the hook to `beforeCreate` and `beforeUpdate`
-      beforeCreate: updatePortfolioBalanceHook,
-      beforeUpdate: updatePortfolioBalanceHook,
+      afterCreate: updatePortfolioBalanceHook,
+      afterUpdate: updatePortfolioBalanceHook,
     },
     indexes: [
       {
