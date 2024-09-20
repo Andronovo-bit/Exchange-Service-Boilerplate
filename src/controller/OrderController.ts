@@ -53,6 +53,11 @@ export class OrderController {
    */
   public cancelOrder = asyncHandler(async (req: Request, res: Response): Promise<Response> => {
     const orderId = parseInt(req.params.orderId, 10);
+    const userId = parseInt(req.params.userId, 10);
+    if (isNaN(userId)) {
+      return error(res, 400, 'INVALID_USER_ID', 'Invalid user');
+    }
+
     if (isNaN(orderId)) {
       return error(res, 400, 'INVALID_ORDER_ID', 'Invalid order ID');
     }

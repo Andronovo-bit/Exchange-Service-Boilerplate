@@ -14,7 +14,7 @@ export interface UserAttributes {
 }
 
 // Define the creation attributes for the User model
-export type UserCreationAttributes = Optional<UserAttributes, 'id'>;
+export type UserCreationAttributes = Optional<UserAttributes, 'id' | 'balance'>;
 
 
 const sequelizeConnection = SequelizeConnection.getInstance();

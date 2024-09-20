@@ -82,6 +82,11 @@ export class UserController {
     }
     const userDetails: Partial<Omit<UserAttributes, 'password' | 'id' | 'balance'>> = req.body;
     const updatedUser = await this.userService.update(userId, userDetails);
-    return success(res, 200, updatedUser);
+
+    if (!updatedUser) {
+      return error(res, 404, 'USER_NOT_FOUND', 'User not found');
+    }
+
+    return success(res, 200, {username: updatedUser.username, email: updatedUser.email});
   });
 }
