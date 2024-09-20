@@ -46,4 +46,27 @@ export class PriceController {
     const updatedPrice = await this.priceService.updateSharePrice(shareId, newPrice);
     return success(res, 200, updatedPrice);
   });
+
+  /**
+   * Get all shares.
+   * @param req - The request object.
+   * @param res - The response object.
+   * @returns A promise that resolves to an array of share prices.
+   * @example GET /v1/price
+   */
+
+  public getShares = asyncHandler(async (req: Request, res: Response): Promise<Response> => {
+    const shares = await this.priceService.getShares();
+    return success(res, 200, shares);
+  });
+
+  public getShare = asyncHandler(async (req: Request, res: Response): Promise<Response> => {
+    const shareId = parseInt(req.params.shareId, 10);
+    if (isNaN(shareId)) {
+      return error(res, 400, 'INVALID_SHARE_ID', 'Invalid share ID');
+    }
+
+    const price = await this.priceService.getSharePrice(shareId);
+    return success(res, 200, price);
+  });
 }

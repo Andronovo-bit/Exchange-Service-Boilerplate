@@ -5,7 +5,7 @@ import PriceRepository from '../repositories/PriceRepository';
 import PortfolioRepository from '../repositories/PortfolioRepository';
 import { BaseService } from './BaseService';
 import Trade, { TradeAttributes, TradeCreationAttributes, TradeCreationRequest } from '../models/trade/Trade';
-import { NotFoundError } from '../utils/errors';
+import { BadRequestError, NotFoundError } from '../utils/errors';
 
 @injectable()
 class TradeService extends BaseService<Trade, TradeAttributes, TradeCreationAttributes> {
@@ -29,14 +29,14 @@ class TradeService extends BaseService<Trade, TradeAttributes, TradeCreationAttr
     const { share_id, quantity } = data;
 
     const latestPrice = await this.priceRepository.findLatestPrice(share_id);
-    if (!latestPrice) throw new NotFoundError('Market price not found');
+    if (!latestPrice) throw new BadRequestError('Market price not found');
 
     const totalCost = latestPrice.price * quantity;
     const user = await this.userRepository.findByPk(userId);
     if (!user) throw new NotFoundError('User not found');
 
     const portfolio = await this.portfolioRepository.findPortfolioByUserId(userId);
-    if (!portfolio) throw new NotFoundError('Portfolio not found');
+    if (!portfolio) throw new BadRequestError('Portfolio not found');
 
     const portfolioId = portfolio.portfolio_id;
 
@@ -64,13 +64,13 @@ class TradeService extends BaseService<Trade, TradeAttributes, TradeCreationAttr
   public async sellMarket(userId: number, data: TradeCreationRequest): Promise<Trade> {
     const { share_id, quantity } = data;
     const latestPrice = await this.priceRepository.findLatestPrice(share_id);
-    if (!latestPrice) throw new NotFoundError('Market price not found');
+    if (!latestPrice) throw new BadRequestError('Market price not found');
 
     const user = await this.userRepository.findByPk(userId);
     if (!user) throw new NotFoundError('User not found');
 
     const portfolio = await this.portfolioRepository.findPortfolioByUserId(userId);
-    if (!portfolio) throw new NotFoundError('Portfolio not found');
+    if (!portfolio) throw new BadRequestError('Portfolio not found');
     const portfolioId = portfolio.portfolio_id;
 
     //check enough shares
@@ -103,7 +103,7 @@ class TradeService extends BaseService<Trade, TradeAttributes, TradeCreationAttr
     if (!user) throw new NotFoundError('User not found');
 
     const portfolio = await this.portfolioRepository.findPortfolioByUserId(userId);
-    if (!portfolio) throw new NotFoundError('Portfolio not found');
+    if (!portfolio) throw new BadRequestError('Portfolio not found');
     const portfolioId = portfolio.portfolio_id;
 
     const trade: TradeCreationAttributes = {
@@ -131,7 +131,7 @@ class TradeService extends BaseService<Trade, TradeAttributes, TradeCreationAttr
     if (!user) throw new NotFoundError('User not found');
 
     const portfolio = await this.portfolioRepository.findPortfolioByUserId(userId);
-    if (!portfolio) throw new NotFoundError('Portfolio not found');
+    if (!portfolio) throw new BadRequestError('Portfolio not found');
     const portfolioId = portfolio.portfolio_id;
 
     const trade: TradeCreationAttributes = {

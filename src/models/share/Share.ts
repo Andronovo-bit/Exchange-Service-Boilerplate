@@ -49,6 +49,10 @@ Share.init(
       type: DataTypes.CHAR(3),
       allowNull: false,
       unique: true,
+      validate: {
+        isUppercase: true,
+        len: [3, 3],
+      },
     },
     name: {
       type: DataTypes.STRING(100),

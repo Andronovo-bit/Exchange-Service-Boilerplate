@@ -3,6 +3,7 @@ import PriceRepository from '../repositories/PriceRepository';
 import { BaseService } from './BaseService';
 import SharePrice, { SharePriceAttributes, SharePriceCreationAttributes } from '../models/share/SharePrice';
 import { NotFoundError } from '../utils/errors';
+import Share from '../models/share/Share';
 
 @injectable()
 class PriceService extends BaseService<SharePrice, SharePriceAttributes, SharePriceCreationAttributes> {
@@ -39,6 +40,30 @@ class PriceService extends BaseService<SharePrice, SharePriceAttributes, SharePr
     const updatedPrice = await this.priceRepository.create(sharePrice);
 
     return updatedPrice;
+  }
+
+  /**
+   * Get all share prices.
+   * @returns A promise that resolves to an array of share prices.
+   * @throws NotFoundError if no share prices are found.
+   * @throws Error if an unexpected error occurs.
+   */
+  public async getShares(): Promise<Share[]> {
+    const sharePrices = await this.priceRepository.getAllShares();
+
+    if (!sharePrices) {
+      throw new NotFoundError('Share prices not found');
+    }
+    return sharePrices;
+  }
+
+  public async getShareById(symbol: string): Promise<Share> {
+    const share = await this.priceRepository.findShareBySymbol(symbol);
+
+    if (!share) {
+      throw new NotFoundError('Share not found');
+    }
+    return share;
   }
 }
 
