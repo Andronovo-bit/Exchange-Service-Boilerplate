@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "5e1e929f-83cd-45ca-8fdb-dff7ef8d8195",
-		"name": "Exchange",
+		"name": "EvaExchange",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "10689835"
 	},
@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"user6@example.com\",\r\n    \"password\":\"Initial deposit\"\r\n}",
+							"raw": "{\r\n    \"email\":\"user5@example.com\",\r\n    \"password\":\"password5\"\r\n    \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -47,7 +47,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"user6@example.com\",\r\n    \"password\":\"Initial deposit\"\r\n}",
+							"raw": "{\r\n    \"email\":\"user6@example.com\",\r\n    \"password\":\"password6\",\r\n    \"username\":\"user6\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -55,7 +55,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:7171/api/v1/auth/login",
+							"raw": "http://localhost:7171/api/v1/auth/register",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -65,7 +65,7 @@
 								"api",
 								"v1",
 								"auth",
-								"login"
+								"register"
 							]
 						}
 					},
@@ -80,11 +80,21 @@
 				{
 					"name": "Trade Market Buy",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTcyNjgyNDUyNywiZXhwIjoxNzI2OTEwOTI3fQ.albo0RMEvSD06dYYs-nmdJVXEJ1uR8FwcCNhm_h4Y1Y",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"share_id\":1,\r\n    \"quantity\":5\r\n}",
+							"raw": "{\r\n    \"share_id\":6,\r\n    \"quantity\":10\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -92,7 +102,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:7171/api/v1/trade/market/buy/6",
+							"raw": "http://localhost:7171/api/v1/trade/market/buy/8",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -104,7 +114,7 @@
 								"trade",
 								"market",
 								"buy",
-								"6"
+								"8"
 							]
 						}
 					},
@@ -113,11 +123,21 @@
 				{
 					"name": "Trade Market Sell",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTcyNjgyNDUyNywiZXhwIjoxNzI2OTEwOTI3fQ.albo0RMEvSD06dYYs-nmdJVXEJ1uR8FwcCNhm_h4Y1Y",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"share_id\":1,\r\n    \"quantity\":5\r\n}",
+							"raw": "{\r\n    \"share_id\":1,\r\n    \"quantity\":10\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -125,7 +145,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:7171/api/v1/trade/market/sell/6",
+							"raw": "http://localhost:7171/api/v1/trade/market/sell/7",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -137,7 +157,7 @@
 								"trade",
 								"market",
 								"sell",
-								"6"
+								"7"
 							]
 						}
 					},
@@ -150,7 +170,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"share_id\": 1,\r\n    \"portfolio_id\":6,\r\n    \"order_type\":\"BUY\",\r\n    \"quantity\": 3,\r\n    \"price\": 155\r\n}",
+							"raw": "{\r\n    \"share_id\": 1,\r\n    \"portfolio_id\":6,\r\n    \"order_type\":\"BUY\",\r\n    \"quantity\": 3,\r\n    \"price\": 150\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -212,17 +232,8 @@
 					"request": {
 						"method": "PUT",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"newPrice\":155\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://localhost:7171/api/v1/price/1",
+							"raw": "http://localhost:7171/api/v1/order/cancel/6/7",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -231,8 +242,10 @@
 							"path": [
 								"api",
 								"v1",
-								"price",
-								"1"
+								"order",
+								"cancel",
+								"6",
+								"7"
 							]
 						}
 					},
@@ -254,11 +267,21 @@
 				{
 					"name": "Deposit",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTcyNjgyNDUyNywiZXhwIjoxNzI2OTEwOTI3fQ.albo0RMEvSD06dYYs-nmdJVXEJ1uR8FwcCNhm_h4Y1Y",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"amount\":\"100.00\",\r\n    \"description\":\"Initial deposit\"\r\n}",
+							"raw": "{\r\n    \"amount\":10000.00,\r\n    \"description\":\"Initial deposit\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -266,7 +289,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:7171/api/v1/transaction/deposit/6",
+							"raw": "http://localhost:7171/api/v1/transaction/deposit/7",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -277,7 +300,7 @@
 								"v1",
 								"transaction",
 								"deposit",
-								"6"
+								"7"
 							]
 						}
 					},
@@ -286,11 +309,21 @@
 				{
 					"name": "Withdraw",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTcyNjgyNDUyNywiZXhwIjoxNzI2OTEwOTI3fQ.albo0RMEvSD06dYYs-nmdJVXEJ1uR8FwcCNhm_h4Y1Y",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"amount\":100.00\r\n}",
+							"raw": "{\r\n    \"amount\":100.00,\r\n    \"description\":\"For Tax\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -298,7 +331,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:7171/api/v1/transaction/withdraw/6",
+							"raw": "http://localhost:7171/api/v1/transaction/withdraw/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -309,7 +342,7 @@
 								"v1",
 								"transaction",
 								"withdraw",
-								"6"
+								"5"
 							]
 						}
 					},
@@ -323,10 +356,20 @@
 				{
 					"name": "Get User Balance",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcyNjgyMzgyMywiZXhwIjoxNzI2OTEwMjIzfQ.8-7R_ayWjtlt5NqeyaYVnrfIX0KjlZRte4IxEnuJMIQ",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:7171/api/v1/portfolio/holdings/6",
+							"raw": "http://localhost:7171/api/v1/user/balance/7",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -335,9 +378,9 @@
 							"path": [
 								"api",
 								"v1",
-								"portfolio",
-								"holdings",
-								"6"
+								"user",
+								"balance",
+								"7"
 							]
 						}
 					},
@@ -350,7 +393,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"newPrice\":155\r\n}",
+							"raw": "{\r\n    \"email\":\"test66@example.com\",\r\n    \"username\":\"tes66\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -358,7 +401,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:7171/api/v1/price/1",
+							"raw": "http://localhost:7171/api/v1/user/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -367,7 +410,7 @@
 							"path": [
 								"api",
 								"v1",
-								"price",
+								"user",
 								"1"
 							]
 						}
@@ -382,10 +425,20 @@
 				{
 					"name": "CreatePortfolio",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTcyNjgyNDUyNywiZXhwIjoxNzI2OTEwOTI3fQ.albo0RMEvSD06dYYs-nmdJVXEJ1uR8FwcCNhm_h4Y1Y",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:7171/api/v1/portfolio/create/6",
+							"raw": "http://localhost:7171/api/v1/portfolio/create/7",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -396,7 +449,7 @@
 								"v1",
 								"portfolio",
 								"create",
-								"6"
+								"7"
 							]
 						}
 					},
@@ -405,10 +458,20 @@
 				{
 					"name": "Get User Portfolio",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcyNjgyMzgyMywiZXhwIjoxNzI2OTEwMjIzfQ.8-7R_ayWjtlt5NqeyaYVnrfIX0KjlZRte4IxEnuJMIQ",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:7171/api/v1/portfolio/holdings/6",
+							"raw": "http://localhost:7171/api/v1/user/portfolio/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -417,9 +480,9 @@
 							"path": [
 								"api",
 								"v1",
+								"user",
 								"portfolio",
-								"holdings",
-								"6"
+								"5"
 							]
 						}
 					},
@@ -428,6 +491,16 @@
 				{
 					"name": "Get PortfolioHoldings By UserId",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTcyNjgyNDUyNywiZXhwIjoxNzI2OTEwOTI3fQ.albo0RMEvSD06dYYs-nmdJVXEJ1uR8FwcCNhm_h4Y1Y",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -456,6 +529,16 @@
 				{
 					"name": "Update Share Price",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTcyNjgyNDUyNywiZXhwIjoxNzI2OTEwOTI3fQ.albo0RMEvSD06dYYs-nmdJVXEJ1uR8FwcCNhm_h4Y1Y",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -468,7 +551,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:7171/api/v1/price/1",
+							"raw": "http://localhost:7171/api/v1/price/6",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -478,7 +561,7 @@
 								"api",
 								"v1",
 								"price",
-								"1"
+								"6"
 							]
 						}
 					},
@@ -487,8 +570,31 @@
 				{
 					"name": "Get All Shares",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTcyNjg2MDY5MywiZXhwIjoxNzI2OTQ3MDkzfQ.vQZOdumPwEk2kDROsK9wkOcq_uIv89D1J3_vH236CQw",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7171/api/v1/price",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7171",
+							"path": [
+								"api",
+								"v1",
+								"price"
+							]
+						}
 					},
 					"response": []
 				},
