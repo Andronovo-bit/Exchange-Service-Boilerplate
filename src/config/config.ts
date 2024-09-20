@@ -14,6 +14,8 @@ const envVarsSchema = Joi.object({
   DB_HOST: Joi.string().default('127.0.0.1'),
   DB_PORT: Joi.number().default(5432),
   DB_DIALECT: Joi.string().valid('postgres', 'mysql', 'mariadb', 'sqlite', 'mssql').default('postgres'),
+  JWT_SECRET: Joi.string().required().label('JWT Secret'),
+  JWT_EXPIRATION: Joi.string().required().label('JWT Expiration'),
 }).unknown();
 
 const { value: envVars, error } = envVarsSchema.prefs({ errors: { label: 'key' } }).validate(process.env);
@@ -38,6 +40,10 @@ const config = {
   },
   api: {
     prefix: "/api",
+  },
+  jwt: {
+    secret: envVars.JWT_SECRET,
+    expiration: envVars.JWT_EXPIRATION,
   },
 };
 
