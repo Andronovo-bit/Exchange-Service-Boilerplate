@@ -12,7 +12,7 @@ export default (app: Router): void => {
   app.use('/v1/price', authenticateJWTNoUser, router);
 
   router.get('/', priceController.getShares);
-  router.get('/:shareId', priceController.getSharePrice);
-  router.get('/share/:shareId', priceController.getShare);
+  router.get('/history/:shareId', priceController.getSharePriceHistory);
+  router.get('/share', priceController.getShare);
   router.put('/:shareId', validate(updateSharePriceSchema), priceController.updateSharePrice);
 };

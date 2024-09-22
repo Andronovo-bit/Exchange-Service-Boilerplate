@@ -16,12 +16,12 @@ class PriceService extends BaseService<SharePrice, SharePriceAttributes, SharePr
    * @param shareId - The ID of the share.
    * @returns A promise that resolves to the latest share price.
    */
-  public async getSharePrice(shareId: number): Promise<SharePrice> {
-    const latestPrice = await this.priceRepository.findLatestPrice(shareId);
-    if (!latestPrice) {
+  public async getSharePriceHistory(shareId: number): Promise<SharePrice[]> {
+    const prices = await this.priceRepository.getSharePriceHistory(shareId);
+    if (!prices || prices.length === 0) {
       throw new NotFoundError('Share price not found');
     }
-    return latestPrice;
+    return prices;
   }
 
   /**
@@ -57,13 +57,14 @@ class PriceService extends BaseService<SharePrice, SharePriceAttributes, SharePr
     return sharePrices;
   }
 
-  public async getShareById(symbol: string): Promise<Share> {
-    const share = await this.priceRepository.findShareBySymbol(symbol);
-
-    if (!share) {
-      throw new NotFoundError('Share not found');
+  public async getShare(shareId?: number, shareSymbol?: string): Promise<Share> {
+    if (shareId) {
+      return this.priceRepository.getShareById(shareId);
+    } else if (shareSymbol) {
+      return this.priceRepository.findShareBySymbol(shareSymbol);
+    } else {
+      throw new Error('Invalid arguments');
     }
-    return share;
   }
 }
 

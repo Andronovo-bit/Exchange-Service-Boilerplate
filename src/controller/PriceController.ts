@@ -15,14 +15,14 @@ export class PriceController {
    * @returns A promise that resolves to the share price.
    * @example GET /v1/price/1
    */
-  public getSharePrice = asyncHandler(async (req: Request, res: Response): Promise<Response> => {
+  public getSharePriceHistory = asyncHandler(async (req: Request, res: Response): Promise<Response> => {
     const shareId = parseInt(req.params.shareId, 10);
     if (isNaN(shareId)) {
       return error(res, 400, 'INVALID_SHARE_ID', 'Invalid share ID');
     }
 
-    const price = await this.priceService.getSharePrice(shareId);
-    return success(res, 200, price);
+    const prices = await this.priceService.getSharePriceHistory(shareId);
+    return success(res, 200, prices);
   });
 
   /**
@@ -60,13 +60,24 @@ export class PriceController {
     return success(res, 200, shares);
   });
 
+
+  /**
+   * Get the price of a specific share.
+   * @param req - The request object.
+   * @param res - The response object.
+   * @returns A promise that resolves to the share price.
+   * @example GET /v1/price/share?shareId=1
+   * @example GET /v1/price/share/1?shareSymbol=ABC
+   */
   public getShare = asyncHandler(async (req: Request, res: Response): Promise<Response> => {
-    const shareId = parseInt(req.params.shareId, 10);
-    if (isNaN(shareId)) {
-      return error(res, 400, 'INVALID_SHARE_ID', 'Invalid share ID');
+    const shareId = parseInt(req.query.shareId as string, 10);
+    const shareSymbol = req.query.shareSymbol as string;
+
+    if (isNaN(shareId) && !shareSymbol) {
+      return error(res, 400, 'INVALID_QUERY', 'Either share ID or share symbol must be provided');
     }
 
-    const price = await this.priceService.getSharePrice(shareId);
+    const price = await this.priceService.getShare(shareId, shareSymbol);
     return success(res, 200, price);
   });
 }
