@@ -1,5 +1,9 @@
 import Joi from 'joi';
 
+export const emptyBodySchema = Joi.object().valid(null, {});
+
+
+
 export const transactionSchema = Joi.object({
   amount: Joi.number().positive().required(),
   description: Joi.string().optional(),
@@ -10,12 +14,27 @@ export const tradeMarketSchema = Joi.object({
   quantity: Joi.number().integer().positive().required(),
 });
 
+export const tradeGetTypeSchema = Joi.object({
+  tradeType: Joi.string().valid('SELL', 'BUY').optional(),
+  page: Joi.number().integer().min(1).optional(),
+  limit: Joi.number().integer().min(1).optional(),
+});
+
 export const orderLimitSchema = Joi.object({
   share_id: Joi.number().integer().positive().required(),
   portfolio_id: Joi.number().integer().positive().required(),
   order_type: Joi.string().valid('BUY', 'SELL').required(),
   quantity: Joi.number().integer().positive().required(),
   price: Joi.number().positive().required(),
+});
+
+export const orderGetTypeSchema = Joi.object({
+  orderType: Joi.string().valid('SELL', 'BUY').optional(),
+  page: Joi.number().integer().min(1).optional(),
+  limit: Joi.number().integer().min(1).optional(),
+  orderStates: Joi.array()
+    .items(Joi.string().valid('PENDING', 'COMPLETED', 'CANCELLED', 'PARTIALLY_COMPLETED'))
+    .optional(),
 });
 
 export const cancelLimitOrderSchema = Joi.object().valid(null, {});

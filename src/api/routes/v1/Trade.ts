@@ -13,4 +13,5 @@ export default (app: Router): void => {
 
   router.post('/market/buy/:userId', validate(tradeMarketSchema), tradeController.buyMarket);
   router.post('/market/sell/:userId',validate(tradeMarketSchema), tradeController.sellMarket);
+  router.get('/market/history/:userId', tradeController.getMarketTrades);
 };

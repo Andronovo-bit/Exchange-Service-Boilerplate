@@ -145,6 +145,29 @@ class TradeService extends BaseService<Trade, TradeAttributes, TradeCreationAttr
 
     return this.tradeRepository.createTrade(trade);
   }
+
+  /**
+   * Get market trades with pagination.
+   *
+   * @param userId - The ID of the user.
+   * @param page - The page number.
+   * @param limit - The number of trades per page.
+   * @param tradeType - The type of trade (optional).
+   * @returns A promise that resolves to the paginated list of trades.
+   */
+  public async getMarketTrades(
+    userId: number,
+    page: number,
+    limit: number,
+    tradeType?: string,
+  ): Promise<{ trades: Trade[]; total: number }> {
+    const getUserPortfolio = await this.portfolioRepository.findPortfolioByUserId(userId);
+    if (!getUserPortfolio) throw new NotFoundError('Portfolio not found');
+
+    const portfolioId = getUserPortfolio.portfolio_id;
+
+    return this.tradeRepository.getMarketTrades(portfolioId, page, limit, tradeType);
+  }
 }
 
 export default TradeService;

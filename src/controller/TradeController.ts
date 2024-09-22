@@ -4,6 +4,7 @@ import TradeService from '../services/TradeService';
 import { inject, injectable } from 'inversify';
 import { success, error } from '../middleware/ResponseHandler';
 import type { TradeCreationRequest } from '../models/trade/Trade';
+import { tradeGetTypeSchema } from '../utils/validation/schema';
 
 @injectable()
 export class TradeController {
@@ -95,5 +96,39 @@ export class TradeController {
 
     const trade = await this.tradeService.sellLimit(userId, shareId, price, quantity);
     return success(res, 200, trade);
+  });
+
+  /**
+   * Get market trades with pagination.
+   * @param req - The request object.
+   * @param res - The response object.
+   * @returns A promise that resolves to the paginated list of trades.
+   * @description Get market trades with pagination. The tamplete is /v1/trade/market/history/:userId?page=1&limit=10&tradeType=BUY
+   * @example GET /v1/trade/market/history/6?page=1&limit=10
+   * @example GET /v1/trade/market/history/6?page=1&limit=10&tradeType=BUY
+   * @example GET /v1/trade/market/history/6?page=1&limit=10&tradeType=SELL
+   */
+  public getMarketTrades = asyncHandler(async (req: Request, res: Response): Promise<Response> => {
+    const userId = parseInt(req.params.userId, 10);
+
+    if (isNaN(userId)) {
+      return error(res, 400, 'INVALID_USER_ID', 'Invalid user ID');
+    }
+
+    const { error: validationError } = tradeGetTypeSchema.validate(req.query);
+
+    if (validationError) {
+      return error(res, 400, 'INVALID_QUERY_PARAMS', validationError.details[0].message);
+    }
+
+    const tradeType = req.query.tradeType as string;
+    const page = parseInt(req.query.page as string, 10) || 1;
+    const limit = parseInt(req.query.limit as string, 10) || 10;
+
+    if (isNaN(page) || page <= 0 || isNaN(limit) || limit <= 0) {
+      return error(res, 400, 'INVALID_PAGINATION', 'Invalid pagination parameters');
+    }
+    const trades = await this.tradeService.getMarketTrades(userId, page, limit, tradeType);
+    return success(res, 200, trades);
   });
 }
