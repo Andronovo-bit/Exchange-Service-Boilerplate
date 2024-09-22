@@ -72,7 +72,7 @@ To create the database tables and seed initial data, run the following commands:
 ```bash
 npm run dev (First run for database table sync and then stopping)
 npm run migrate
-npx run seed:all
+npm run seed:all
 ```
 
 ### Step 5: Start the Application
