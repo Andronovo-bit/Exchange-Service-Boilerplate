@@ -1,637 +1,2910 @@
 {
-	"info": {
-		"_postman_id": "5e1e929f-83cd-45ca-8fdb-dff7ef8d8195",
-		"name": "EvaExchange",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "10689835"
-	},
-	"item": [
-		{
-			"name": "Auth",
-			"item": [
-				{
-					"name": "Login",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"user5@example.com\",\r\n    \"password\":\"password5\"\r\n    \r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:7171/api/v1/auth/login",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "7171",
-							"path": [
-								"api",
-								"v1",
-								"auth",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Register",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"user6@example.com\",\r\n    \"password\":\"password6\",\r\n    \"username\":\"user6\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:7171/api/v1/auth/register",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "7171",
-							"path": [
-								"api",
-								"v1",
-								"auth",
-								"register"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"description": "User login and register"
-		},
-		{
-			"name": "Trade - Order",
-			"item": [
-				{
-					"name": "Trade Market Buy",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTcyNjgyNDUyNywiZXhwIjoxNzI2OTEwOTI3fQ.albo0RMEvSD06dYYs-nmdJVXEJ1uR8FwcCNhm_h4Y1Y",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"share_id\":6,\r\n    \"quantity\":10\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:7171/api/v1/trade/market/buy/8",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "7171",
-							"path": [
-								"api",
-								"v1",
-								"trade",
-								"market",
-								"buy",
-								"8"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Trade Market Sell",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTcyNjgyNDUyNywiZXhwIjoxNzI2OTEwOTI3fQ.albo0RMEvSD06dYYs-nmdJVXEJ1uR8FwcCNhm_h4Y1Y",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"share_id\":1,\r\n    \"quantity\":10\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:7171/api/v1/trade/market/sell/7",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "7171",
-							"path": [
-								"api",
-								"v1",
-								"trade",
-								"market",
-								"sell",
-								"7"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Trade Limit Buy",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"share_id\": 1,\r\n    \"portfolio_id\":6,\r\n    \"order_type\":\"BUY\",\r\n    \"quantity\": 3,\r\n    \"price\": 150\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:7171/api/v1/order/create/6",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "7171",
-							"path": [
-								"api",
-								"v1",
-								"order",
-								"create",
-								"6"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Trade Limit Sell",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"share_id\": 1,\r\n    \"portfolio_id\":1,\r\n    \"order_type\":\"SELL\",\r\n    \"quantity\": 5,\r\n    \"price\": 155\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:7171/api/v1/order/create/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "7171",
-							"path": [
-								"api",
-								"v1",
-								"order",
-								"create",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Cancel Limit Order",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:7171/api/v1/order/cancel/6/7",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "7171",
-							"path": [
-								"api",
-								"v1",
-								"order",
-								"cancel",
-								"6",
-								"7"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get My Trade or Order",
-					"request": {
-						"method": "GET",
-						"header": []
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Transaction",
-			"item": [
-				{
-					"name": "Deposit",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTcyNjgyNDUyNywiZXhwIjoxNzI2OTEwOTI3fQ.albo0RMEvSD06dYYs-nmdJVXEJ1uR8FwcCNhm_h4Y1Y",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"amount\":10000.00,\r\n    \"description\":\"Initial deposit\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:7171/api/v1/transaction/deposit/7",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "7171",
-							"path": [
-								"api",
-								"v1",
-								"transaction",
-								"deposit",
-								"7"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Withdraw",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTcyNjgyNDUyNywiZXhwIjoxNzI2OTEwOTI3fQ.albo0RMEvSD06dYYs-nmdJVXEJ1uR8FwcCNhm_h4Y1Y",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"amount\":100.00,\r\n    \"description\":\"For Tax\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:7171/api/v1/transaction/withdraw/5",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "7171",
-							"path": [
-								"api",
-								"v1",
-								"transaction",
-								"withdraw",
-								"5"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "User",
-			"item": [
-				{
-					"name": "Get User Balance",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcyNjgyMzgyMywiZXhwIjoxNzI2OTEwMjIzfQ.8-7R_ayWjtlt5NqeyaYVnrfIX0KjlZRte4IxEnuJMIQ",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:7171/api/v1/user/balance/7",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "7171",
-							"path": [
-								"api",
-								"v1",
-								"user",
-								"balance",
-								"7"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "User Update",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"test66@example.com\",\r\n    \"username\":\"tes66\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:7171/api/v1/user/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "7171",
-							"path": [
-								"api",
-								"v1",
-								"user",
-								"1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Portfolio",
-			"item": [
-				{
-					"name": "CreatePortfolio",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTcyNjgyNDUyNywiZXhwIjoxNzI2OTEwOTI3fQ.albo0RMEvSD06dYYs-nmdJVXEJ1uR8FwcCNhm_h4Y1Y",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:7171/api/v1/portfolio/create/7",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "7171",
-							"path": [
-								"api",
-								"v1",
-								"portfolio",
-								"create",
-								"7"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get User Portfolio",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcyNjgyMzgyMywiZXhwIjoxNzI2OTEwMjIzfQ.8-7R_ayWjtlt5NqeyaYVnrfIX0KjlZRte4IxEnuJMIQ",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:7171/api/v1/user/portfolio/5",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "7171",
-							"path": [
-								"api",
-								"v1",
-								"user",
-								"portfolio",
-								"5"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get PortfolioHoldings By UserId",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTcyNjgyNDUyNywiZXhwIjoxNzI2OTEwOTI3fQ.albo0RMEvSD06dYYs-nmdJVXEJ1uR8FwcCNhm_h4Y1Y",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:7171/api/v1/portfolio/holdings/6",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "7171",
-							"path": [
-								"api",
-								"v1",
-								"portfolio",
-								"holdings",
-								"6"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "SharePrice",
-			"item": [
-				{
-					"name": "Update Share Price",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTcyNjgyNDUyNywiZXhwIjoxNzI2OTEwOTI3fQ.albo0RMEvSD06dYYs-nmdJVXEJ1uR8FwcCNhm_h4Y1Y",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"newPrice\":155\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:7171/api/v1/price/6",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "7171",
-							"path": [
-								"api",
-								"v1",
-								"price",
-								"6"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get All Shares",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTcyNjg2MDY5MywiZXhwIjoxNzI2OTQ3MDkzfQ.vQZOdumPwEk2kDROsK9wkOcq_uIv89D1J3_vH236CQw",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:7171/api/v1/price",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "7171",
-							"path": [
-								"api",
-								"v1",
-								"price"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Share By Symbol",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImlhdCI6MTcyNjg2MDY5MywiZXhwIjoxNzI2OTQ3MDkzfQ.vQZOdumPwEk2kDROsK9wkOcq_uIv89D1J3_vH236CQw",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:7171/api/v1/price/share/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "7171",
-							"path": [
-								"api",
-								"v1",
-								"price",
-								"share",
-								"1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		}
-	]
+  "info": {
+    "_postman_id": "7885ac47-de45-4829-870a-360cb047f81e",
+    "name": "EvaExchange",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "10689835"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\":\"user6@example.com\",\r\n    \"password\":\"password6\"\r\n    \r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:7171/api/v1/auth/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "7171",
+              "path": ["api", "v1", "auth", "login"]
+            }
+          },
+          "response": [
+            {
+              "name": "Login",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\":\"user6@example.com\",\r\n    \"password\":\"password6\"\r\n    \r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:7171/api/v1/auth/login",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "7171",
+                  "path": ["api", "v1", "auth", "login"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Security-Policy",
+                  "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Resource-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Origin-Agent-Cluster",
+                  "value": "?1"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "no-referrer"
+                },
+                {
+                  "key": "Strict-Transport-Security",
+                  "value": "max-age=15552000; includeSubDomains"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-DNS-Prefetch-Control",
+                  "value": "off"
+                },
+                {
+                  "key": "X-Download-Options",
+                  "value": "noopen"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "X-Permitted-Cross-Domain-Policies",
+                  "value": "none"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "100"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "96"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 22 Sep 2024 09:09:21 GMT"
+                },
+                {
+                  "key": "X-RateLimit-Reset",
+                  "value": "1726997050"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "235"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"eb-LEcfQx0txjOXKVs+PVn926AisSU\""
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"statusText\": \"OK\",\n    \"message\": \"Login successful\",\n    \"status\": 200,\n    \"data\": {\n        \"userId\": 6,\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcyNjk5NjE1NSwiZXhwIjoxNzI3MDgyNTU1fQ.P0xvdLQmrUF1EjDmbZOxAKQHv4GRFHjTeB8pFshVEkE\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\":\"user6@example.com\",\r\n    \"password\":\"password6\",\r\n    \"username\":\"user6\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:7171/api/v1/auth/register",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "7171",
+              "path": ["api", "v1", "auth", "register"]
+            }
+          },
+          "response": [
+            {
+              "name": "Register",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\":\"user6@example.com\",\r\n    \"password\":\"password6\",\r\n    \"username\":\"user6\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:7171/api/v1/auth/register",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "7171",
+                  "path": ["api", "v1", "auth", "register"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Security-Policy",
+                  "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Resource-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Origin-Agent-Cluster",
+                  "value": "?1"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "no-referrer"
+                },
+                {
+                  "key": "Strict-Transport-Security",
+                  "value": "max-age=15552000; includeSubDomains"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-DNS-Prefetch-Control",
+                  "value": "off"
+                },
+                {
+                  "key": "X-Download-Options",
+                  "value": "noopen"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "X-Permitted-Cross-Domain-Policies",
+                  "value": "none"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "100"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "99"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 22 Sep 2024 10:31:52 GMT"
+                },
+                {
+                  "key": "X-RateLimit-Reset",
+                  "value": "1727002013"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "126"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"7e-TEhYoXnWMrvhl/hnvzZ/Yaz6s6Y\""
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"statusText\": \"OK\",\n    \"message\": \"User created successfully\",\n    \"status\": 201,\n    \"data\": {\n        \"email\": \"user6@example.com\",\n        \"username\": \"user6\"\n    }\n}"
+            }
+          ]
+        }
+      ],
+      "description": "User login and register"
+    },
+    {
+      "name": "Trade - Order",
+      "item": [
+        {
+          "name": "Get Trades",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcyNjk5NjE1NSwiZXhwIjoxNzI3MDgyNTU1fQ.P0xvdLQmrUF1EjDmbZOxAKQHv4GRFHjTeB8pFshVEkE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:7171/api/v1/trade/market/history/6?page=1&limit=10",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "7171",
+              "path": ["api", "v1", "trade", "market", "history", "6"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Trades",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:7171/api/v1/trade/market/history/6?page=1&limit=10",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "7171",
+                  "path": ["api", "v1", "trade", "market", "history", "6"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Security-Policy",
+                  "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Resource-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Origin-Agent-Cluster",
+                  "value": "?1"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "no-referrer"
+                },
+                {
+                  "key": "Strict-Transport-Security",
+                  "value": "max-age=15552000; includeSubDomains"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-DNS-Prefetch-Control",
+                  "value": "off"
+                },
+                {
+                  "key": "X-Download-Options",
+                  "value": "noopen"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "X-Permitted-Cross-Domain-Policies",
+                  "value": "none"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "100"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "99"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 22 Sep 2024 10:01:02 GMT"
+                },
+                {
+                  "key": "X-RateLimit-Reset",
+                  "value": "1727000163"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "768"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"300-KCWQ837ZJYYXmh22umR2l7SoNlk\""
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"statusText\": \"OK\",\n    \"status\": 200,\n    \"data\": {\n        \"trades\": [\n            {\n                \"trade_id\": 11,\n                \"portfolio_id\": 6,\n                \"share_id\": 1,\n                \"trade_type\": \"BUY\",\n                \"quantity\": 5,\n                \"price\": \"150.00\",\n                \"price_type\": \"LIMIT\",\n                \"trade_date\": \"2024-09-22T09:40:35.429Z\",\n                \"createdAt\": \"2024-09-22T09:40:35.429Z\",\n                \"updatedAt\": \"2024-09-22T09:40:35.429Z\"\n            },\n            {\n                \"trade_id\": 10,\n                \"portfolio_id\": 6,\n                \"share_id\": 1,\n                \"trade_type\": \"SELL\",\n                \"quantity\": 10,\n                \"price\": \"155.00\",\n                \"price_type\": \"MARKET\",\n                \"trade_date\": \"2024-09-21T12:14:58.295Z\",\n                \"createdAt\": \"2024-09-21T12:14:58.295Z\",\n                \"updatedAt\": \"2024-09-21T12:14:58.295Z\"\n            },\n            {\n                \"trade_id\": 9,\n                \"portfolio_id\": 6,\n                \"share_id\": 1,\n                \"trade_type\": \"BUY\",\n                \"quantity\": 10,\n                \"price\": \"150.00\",\n                \"price_type\": \"MARKET\",\n                \"trade_date\": \"2024-09-21T12:12:05.200Z\",\n                \"createdAt\": \"2024-09-21T12:12:05.200Z\",\n                \"updatedAt\": \"2024-09-21T12:12:05.200Z\"\n            }\n        ],\n        \"total\": 3\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Orders",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcyNjkyMDYwMCwiZXhwIjoxNzI3MDA3MDAwfQ.AOLrCo9YmLelEeBE0wD7_2XaPhtH4QQJB1KXZXZIbck",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:7171/api/v1/order/history/6?page=1&limit=10&orderStates[]=COMPLETED&orderStates[]=PENDING",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "7171",
+              "path": ["api", "v1", "order", "history", "6"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "orderStates[]",
+                  "value": "COMPLETED"
+                },
+                {
+                  "key": "orderStates[]",
+                  "value": "PENDING"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Orders",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:7171/api/v1/order/history/6?page=1&limit=10&orderStates[]=PENDING&orderStates[]=CANCELLED",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "7171",
+                  "path": ["api", "v1", "order", "history", "6"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "orderStates[]",
+                      "value": "PENDING"
+                    },
+                    {
+                      "key": "orderStates[]",
+                      "value": "CANCELLED"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Security-Policy",
+                  "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Resource-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Origin-Agent-Cluster",
+                  "value": "?1"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "no-referrer"
+                },
+                {
+                  "key": "Strict-Transport-Security",
+                  "value": "max-age=15552000; includeSubDomains"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-DNS-Prefetch-Control",
+                  "value": "off"
+                },
+                {
+                  "key": "X-Download-Options",
+                  "value": "noopen"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "X-Permitted-Cross-Domain-Policies",
+                  "value": "none"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "100"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "93"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 22 Sep 2024 09:57:19 GMT"
+                },
+                {
+                  "key": "X-RateLimit-Reset",
+                  "value": "1726999743"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "574"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"23e-w2NDgkkcGzen4/Dzx+bZ7LLMOx8\""
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"statusText\": \"OK\",\n    \"status\": 200,\n    \"data\": {\n        \"orders\": [\n            {\n                \"order_id\": 3,\n                \"portfolio_id\": 6,\n                \"share_id\": 1,\n                \"order_type\": \"SELL\",\n                \"quantity\": 5,\n                \"price\": \"150.00\",\n                \"order_date\": \"2024-09-22T09:54:08.945Z\",\n                \"remaining_quantity\": 5,\n                \"status\": \"PENDING\",\n                \"createdAt\": \"2024-09-22T09:54:08.946Z\",\n                \"updatedAt\": \"2024-09-22T09:54:08.946Z\"\n            },\n            {\n                \"order_id\": 1,\n                \"portfolio_id\": 6,\n                \"share_id\": 1,\n                \"order_type\": \"BUY\",\n                \"quantity\": 10,\n                \"price\": \"150.00\",\n                \"order_date\": \"2024-09-22T09:38:54.673Z\",\n                \"remaining_quantity\": 5,\n                \"status\": \"CANCELLED\",\n                \"createdAt\": \"2024-09-22T09:38:54.674Z\",\n                \"updatedAt\": \"2024-09-22T09:42:13.057Z\"\n            }\n        ],\n        \"total\": 2\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Trade Market Buy",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcyNjkyMDYwMCwiZXhwIjoxNzI3MDA3MDAwfQ.AOLrCo9YmLelEeBE0wD7_2XaPhtH4QQJB1KXZXZIbck",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"share_id\":1,\r\n    \"quantity\":10\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:7171/api/v1/trade/market/buy/6",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "7171",
+              "path": ["api", "v1", "trade", "market", "buy", "6"]
+            }
+          },
+          "response": [
+            {
+              "name": "Trade Market Buy",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"share_id\":1,\r\n    \"quantity\":10\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:7171/api/v1/trade/market/buy/6",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "7171",
+                  "path": ["api", "v1", "trade", "market", "buy", "6"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Security-Policy",
+                  "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Resource-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Origin-Agent-Cluster",
+                  "value": "?1"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "no-referrer"
+                },
+                {
+                  "key": "Strict-Transport-Security",
+                  "value": "max-age=15552000; includeSubDomains"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-DNS-Prefetch-Control",
+                  "value": "off"
+                },
+                {
+                  "key": "X-Download-Options",
+                  "value": "noopen"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "X-Permitted-Cross-Domain-Policies",
+                  "value": "none"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "100"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "92"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 22 Sep 2024 10:04:12 GMT"
+                },
+                {
+                  "key": "X-RateLimit-Reset",
+                  "value": "1727000163"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "275"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"113-hklY8z6ttNkEXluFba2meL/aq/Y\""
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"statusText\": \"OK\",\n    \"status\": 200,\n    \"data\": {\n        \"trade_date\": \"2024-09-22T10:04:12.639Z\",\n        \"trade_id\": 13,\n        \"portfolio_id\": 6,\n        \"share_id\": 1,\n        \"quantity\": 10,\n        \"price\": \"150.00\",\n        \"trade_type\": \"BUY\",\n        \"price_type\": \"MARKET\",\n        \"updatedAt\": \"2024-09-22T10:04:12.639Z\",\n        \"createdAt\": \"2024-09-22T10:04:12.639Z\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Trade Market Sell",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcyNjkyMDYwMCwiZXhwIjoxNzI3MDA3MDAwfQ.AOLrCo9YmLelEeBE0wD7_2XaPhtH4QQJB1KXZXZIbck",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"share_id\":1,\r\n    \"quantity\":10\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:7171/api/v1/trade/market/sell/6",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "7171",
+              "path": ["api", "v1", "trade", "market", "sell", "6"]
+            }
+          },
+          "response": [
+            {
+              "name": "Trade Market Sell",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"share_id\":1,\r\n    \"quantity\":10\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:7171/api/v1/trade/market/sell/6",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "7171",
+                  "path": ["api", "v1", "trade", "market", "sell", "6"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Security-Policy",
+                  "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Resource-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Origin-Agent-Cluster",
+                  "value": "?1"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "no-referrer"
+                },
+                {
+                  "key": "Strict-Transport-Security",
+                  "value": "max-age=15552000; includeSubDomains"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-DNS-Prefetch-Control",
+                  "value": "off"
+                },
+                {
+                  "key": "X-Download-Options",
+                  "value": "noopen"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "X-Permitted-Cross-Domain-Policies",
+                  "value": "none"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "100"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "91"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 22 Sep 2024 10:04:17 GMT"
+                },
+                {
+                  "key": "X-RateLimit-Reset",
+                  "value": "1727000163"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "276"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"114-x5Wo7acH15TXqKuZRwvlDhga+pw\""
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"statusText\": \"OK\",\n    \"status\": 200,\n    \"data\": {\n        \"trade_date\": \"2024-09-22T10:04:17.869Z\",\n        \"trade_id\": 14,\n        \"portfolio_id\": 6,\n        \"share_id\": 1,\n        \"quantity\": 10,\n        \"price\": \"150.00\",\n        \"trade_type\": \"SELL\",\n        \"price_type\": \"MARKET\",\n        \"updatedAt\": \"2024-09-22T10:04:17.869Z\",\n        \"createdAt\": \"2024-09-22T10:04:17.869Z\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Trade Limit Buy",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcyNjk5NjE1NSwiZXhwIjoxNzI3MDgyNTU1fQ.P0xvdLQmrUF1EjDmbZOxAKQHv4GRFHjTeB8pFshVEkE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"share_id\": 1,\r\n    \"portfolio_id\":6,\r\n    \"order_type\":\"BUY\",\r\n    \"quantity\": 10,\r\n    \"price\": 150\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:7171/api/v1/order/create/6",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "7171",
+              "path": ["api", "v1", "order", "create", "6"]
+            }
+          },
+          "response": [
+            {
+              "name": "Trade Limit Buy",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"share_id\": 1,\r\n    \"portfolio_id\":6,\r\n    \"order_type\":\"BUY\",\r\n    \"quantity\": 10,\r\n    \"price\": 150\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:7171/api/v1/order/create/6",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "7171",
+                  "path": ["api", "v1", "order", "create", "6"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Security-Policy",
+                  "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Resource-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Origin-Agent-Cluster",
+                  "value": "?1"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "no-referrer"
+                },
+                {
+                  "key": "Strict-Transport-Security",
+                  "value": "max-age=15552000; includeSubDomains"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-DNS-Prefetch-Control",
+                  "value": "off"
+                },
+                {
+                  "key": "X-Download-Options",
+                  "value": "noopen"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "X-Permitted-Cross-Domain-Policies",
+                  "value": "none"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "100"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "97"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 22 Sep 2024 09:38:54 GMT"
+                },
+                {
+                  "key": "X-RateLimit-Reset",
+                  "value": "1726998473"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "295"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"127-4l/2Yf2mBsDdZO+mRfJh8DHMKRI\""
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"statusText\": \"OK\",\n    \"status\": 201,\n    \"data\": {\n        \"order_id\": 1,\n        \"share_id\": 1,\n        \"portfolio_id\": 6,\n        \"order_type\": \"BUY\",\n        \"quantity\": 10,\n        \"price\": \"150.00\",\n        \"status\": \"PENDING\",\n        \"order_date\": \"2024-09-22T09:38:54.673Z\",\n        \"remaining_quantity\": 10,\n        \"updatedAt\": \"2024-09-22T09:38:54.674Z\",\n        \"createdAt\": \"2024-09-22T09:38:54.674Z\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Trade Limit Sell",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcyNjk5NjE1NSwiZXhwIjoxNzI3MDgyNTU1fQ.P0xvdLQmrUF1EjDmbZOxAKQHv4GRFHjTeB8pFshVEkE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"share_id\": 1,\r\n    \"portfolio_id\":6,\r\n    \"order_type\":\"SELL\",\r\n    \"quantity\": 5,\r\n    \"price\": 150\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:7171/api/v1/order/create/6",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "7171",
+              "path": ["api", "v1", "order", "create", "6"]
+            }
+          },
+          "response": [
+            {
+              "name": "Trade Limit Sell",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"share_id\": 1,\r\n    \"portfolio_id\":6,\r\n    \"order_type\":\"SELL\",\r\n    \"quantity\": 5,\r\n    \"price\": 150\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:7171/api/v1/order/create/6",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "7171",
+                  "path": ["api", "v1", "order", "create", "6"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Security-Policy",
+                  "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Resource-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Origin-Agent-Cluster",
+                  "value": "?1"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "no-referrer"
+                },
+                {
+                  "key": "Strict-Transport-Security",
+                  "value": "max-age=15552000; includeSubDomains"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-DNS-Prefetch-Control",
+                  "value": "off"
+                },
+                {
+                  "key": "X-Download-Options",
+                  "value": "noopen"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "X-Permitted-Cross-Domain-Policies",
+                  "value": "none"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "100"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "98"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 22 Sep 2024 09:54:08 GMT"
+                },
+                {
+                  "key": "X-RateLimit-Reset",
+                  "value": "1726999743"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "294"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"126-QLyPGOEwF11Q1MBdU3qhLD8GAZ8\""
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"statusText\": \"OK\",\n    \"status\": 201,\n    \"data\": {\n        \"order_id\": 3,\n        \"share_id\": 1,\n        \"portfolio_id\": 6,\n        \"order_type\": \"SELL\",\n        \"quantity\": 5,\n        \"price\": \"150.00\",\n        \"status\": \"PENDING\",\n        \"order_date\": \"2024-09-22T09:54:08.945Z\",\n        \"remaining_quantity\": 5,\n        \"updatedAt\": \"2024-09-22T09:54:08.946Z\",\n        \"createdAt\": \"2024-09-22T09:54:08.946Z\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Cancel Limit Order",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcyNjk5NjE1NSwiZXhwIjoxNzI3MDgyNTU1fQ.P0xvdLQmrUF1EjDmbZOxAKQHv4GRFHjTeB8pFshVEkE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:7171/api/v1/order/cancel/6/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "7171",
+              "path": ["api", "v1", "order", "cancel", "6", "1"]
+            }
+          },
+          "response": [
+            {
+              "name": "Cancel Limit Order",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:7171/api/v1/order/cancel/6/1",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "7171",
+                  "path": ["api", "v1", "order", "cancel", "6", "1"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Security-Policy",
+                  "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Resource-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Origin-Agent-Cluster",
+                  "value": "?1"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "no-referrer"
+                },
+                {
+                  "key": "Strict-Transport-Security",
+                  "value": "max-age=15552000; includeSubDomains"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-DNS-Prefetch-Control",
+                  "value": "off"
+                },
+                {
+                  "key": "X-Download-Options",
+                  "value": "noopen"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "X-Permitted-Cross-Domain-Policies",
+                  "value": "none"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "100"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "86"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 22 Sep 2024 09:42:13 GMT"
+                },
+                {
+                  "key": "X-RateLimit-Reset",
+                  "value": "1726998473"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "296"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"128-eJhNKifk0eBcHBxryJVKSeensZg\""
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"statusText\": \"OK\",\n    \"status\": 200,\n    \"data\": {\n        \"order_id\": 1,\n        \"portfolio_id\": 6,\n        \"share_id\": 1,\n        \"order_type\": \"BUY\",\n        \"quantity\": 10,\n        \"price\": \"150.00\",\n        \"order_date\": \"2024-09-22T09:38:54.673Z\",\n        \"remaining_quantity\": 5,\n        \"status\": \"CANCELLED\",\n        \"createdAt\": \"2024-09-22T09:38:54.674Z\",\n        \"updatedAt\": \"2024-09-22T09:42:13.057Z\"\n    }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Transaction",
+      "item": [
+        {
+          "name": "Deposit",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcyNjkyMDYwMCwiZXhwIjoxNzI3MDA3MDAwfQ.AOLrCo9YmLelEeBE0wD7_2XaPhtH4QQJB1KXZXZIbck",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"amount\":10000.00,\r\n    \"description\":\"Initial deposit\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:7171/api/v1/transaction/deposit/6",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "7171",
+              "path": ["api", "v1", "transaction", "deposit", "6"]
+            }
+          },
+          "response": [
+            {
+              "name": "Deposit",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"amount\":10000.00,\r\n    \"description\":\"Initial deposit\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:7171/api/v1/transaction/deposit/6",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "7171",
+                  "path": ["api", "v1", "transaction", "deposit", "6"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Security-Policy",
+                  "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Resource-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Origin-Agent-Cluster",
+                  "value": "?1"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "no-referrer"
+                },
+                {
+                  "key": "Strict-Transport-Security",
+                  "value": "max-age=15552000; includeSubDomains"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-DNS-Prefetch-Control",
+                  "value": "off"
+                },
+                {
+                  "key": "X-Download-Options",
+                  "value": "noopen"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "X-Permitted-Cross-Domain-Policies",
+                  "value": "none"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "100"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "94"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 22 Sep 2024 10:03:39 GMT"
+                },
+                {
+                  "key": "X-RateLimit-Reset",
+                  "value": "1727000163"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "278"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"116-LikHn6MuBbghCizAeo2IytlFOgA\""
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"statusText\": \"OK\",\n    \"status\": 200,\n    \"data\": {\n        \"transaction_date\": \"2024-09-22T10:03:39.634Z\",\n        \"transaction_id\": 13,\n        \"amount\": \"10000.00\",\n        \"description\": \"Initial deposit\",\n        \"transaction_type\": \"DEPOSIT\",\n        \"user_id\": 6,\n        \"updatedAt\": \"2024-09-22T10:03:39.634Z\",\n        \"createdAt\": \"2024-09-22T10:03:39.634Z\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Withdraw",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcyNjkyMDYwMCwiZXhwIjoxNzI3MDA3MDAwfQ.AOLrCo9YmLelEeBE0wD7_2XaPhtH4QQJB1KXZXZIbck",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"amount\":100.00,\r\n    \"description\":\"For Tax\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:7171/api/v1/transaction/withdraw/6",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "7171",
+              "path": ["api", "v1", "transaction", "withdraw", "6"]
+            }
+          },
+          "response": [
+            {
+              "name": "Withdraw",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"amount\":100.00,\r\n    \"description\":\"For Tax\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:7171/api/v1/transaction/withdraw/6",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "7171",
+                  "path": ["api", "v1", "transaction", "withdraw", "6"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Security-Policy",
+                  "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Resource-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Origin-Agent-Cluster",
+                  "value": "?1"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "no-referrer"
+                },
+                {
+                  "key": "Strict-Transport-Security",
+                  "value": "max-age=15552000; includeSubDomains"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-DNS-Prefetch-Control",
+                  "value": "off"
+                },
+                {
+                  "key": "X-Download-Options",
+                  "value": "noopen"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "X-Permitted-Cross-Domain-Policies",
+                  "value": "none"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "100"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "93"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 22 Sep 2024 10:03:47 GMT"
+                },
+                {
+                  "key": "X-RateLimit-Reset",
+                  "value": "1727000163"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "266"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"10a-c9iev4mliCMAuekyv1U68jHj4to\""
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"statusText\": \"OK\",\n    \"status\": 200,\n    \"data\": {\n        \"transaction_date\": \"2024-09-22T10:03:47.175Z\",\n        \"transaction_id\": 14,\n        \"user_id\": 6,\n        \"transaction_type\": \"WITHDRAWAL\",\n        \"amount\": \"100.00\",\n        \"description\": null,\n        \"updatedAt\": \"2024-09-22T10:03:47.175Z\",\n        \"createdAt\": \"2024-09-22T10:03:47.175Z\"\n    }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Get User Balance",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcyNjkyMDYwMCwiZXhwIjoxNzI3MDA3MDAwfQ.AOLrCo9YmLelEeBE0wD7_2XaPhtH4QQJB1KXZXZIbck",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:7171/api/v1/user/balance/6",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "7171",
+              "path": ["api", "v1", "user", "balance", "6"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get User Balance",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:7171/api/v1/user/balance/6",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "7171",
+                  "path": ["api", "v1", "user", "balance", "6"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Security-Policy",
+                  "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Resource-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Origin-Agent-Cluster",
+                  "value": "?1"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "no-referrer"
+                },
+                {
+                  "key": "Strict-Transport-Security",
+                  "value": "max-age=15552000; includeSubDomains"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-DNS-Prefetch-Control",
+                  "value": "off"
+                },
+                {
+                  "key": "X-Download-Options",
+                  "value": "noopen"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "X-Permitted-Cross-Domain-Policies",
+                  "value": "none"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "100"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "95"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 22 Sep 2024 10:03:28 GMT"
+                },
+                {
+                  "key": "X-RateLimit-Reset",
+                  "value": "1727000163"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "61"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"3d-HuSWYPNThGp9miCAmH+K5i3sD9c\""
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"statusText\": \"OK\",\n    \"status\": 200,\n    \"data\": {\n        \"balance\": \"9200.00\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "User Update",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\":\"test66@example.com\",\r\n    \"username\":\"tes66\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:7171/api/v1/user/6",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "7171",
+              "path": ["api", "v1", "user", "6"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Portfolio",
+      "item": [
+        {
+          "name": "CreatePortfolio",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcyNjkyMDYwMCwiZXhwIjoxNzI3MDA3MDAwfQ.AOLrCo9YmLelEeBE0wD7_2XaPhtH4QQJB1KXZXZIbck",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:7171/api/v1/portfolio/create/6",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "7171",
+              "path": ["api", "v1", "portfolio", "create", "6"]
+            }
+          },
+          "response": [
+            {
+              "name": "CreatePortfolio",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:7171/api/v1/portfolio/create/6",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "7171",
+                  "path": ["api", "v1", "portfolio", "create", "6"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Security-Policy",
+                  "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Resource-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Origin-Agent-Cluster",
+                  "value": "?1"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "no-referrer"
+                },
+                {
+                  "key": "Strict-Transport-Security",
+                  "value": "max-age=15552000; includeSubDomains"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-DNS-Prefetch-Control",
+                  "value": "off"
+                },
+                {
+                  "key": "X-Download-Options",
+                  "value": "noopen"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "X-Permitted-Cross-Domain-Policies",
+                  "value": "none"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "100"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "98"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 22 Sep 2024 10:32:26 GMT"
+                },
+                {
+                  "key": "X-RateLimit-Reset",
+                  "value": "1727002013"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "165"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"a5-K7LvL+FHd4IBL/5fFis36XtsLVk\""
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"statusText\": \"OK\",\n    \"status\": 201,\n    \"data\": {\n        \"portfolio_id\": 6,\n        \"user_id\": 6,\n        \"balance\": \"0.00\",\n        \"updatedAt\": \"2024-09-22T10:32:26.132Z\",\n        \"createdAt\": \"2024-09-22T10:32:26.132Z\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get User Portfolio",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcyNjkyMDYwMCwiZXhwIjoxNzI3MDA3MDAwfQ.AOLrCo9YmLelEeBE0wD7_2XaPhtH4QQJB1KXZXZIbck",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:7171/api/v1/user/portfolio/6",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "7171",
+              "path": ["api", "v1", "user", "portfolio", "6"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get User Portfolio",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:7171/api/v1/user/portfolio/6",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "7171",
+                  "path": ["api", "v1", "user", "portfolio", "6"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Security-Policy",
+                  "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Resource-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Origin-Agent-Cluster",
+                  "value": "?1"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "no-referrer"
+                },
+                {
+                  "key": "Strict-Transport-Security",
+                  "value": "max-age=15552000; includeSubDomains"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-DNS-Prefetch-Control",
+                  "value": "off"
+                },
+                {
+                  "key": "X-Download-Options",
+                  "value": "noopen"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "X-Permitted-Cross-Domain-Policies",
+                  "value": "none"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "100"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "97"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 22 Sep 2024 10:02:59 GMT"
+                },
+                {
+                  "key": "X-RateLimit-Reset",
+                  "value": "1727000163"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "167"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"a7-UzdjMabhZ2tnddcKFRwtoDcR+Ec\""
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"statusText\": \"OK\",\n    \"status\": 200,\n    \"data\": {\n        \"portfolio_id\": 6,\n        \"user_id\": 6,\n        \"balance\": \"725.00\",\n        \"createdAt\": \"2024-09-21T12:10:33.584Z\",\n        \"updatedAt\": \"2024-09-22T09:40:35.933Z\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get PortfolioHoldings By UserId",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcyNjkyMDYwMCwiZXhwIjoxNzI3MDA3MDAwfQ.AOLrCo9YmLelEeBE0wD7_2XaPhtH4QQJB1KXZXZIbck",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:7171/api/v1/portfolio/holdings/6",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "7171",
+              "path": ["api", "v1", "portfolio", "holdings", "6"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get PortfolioHoldings By UserId",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:7171/api/v1/portfolio/holdings/6",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "7171",
+                  "path": ["api", "v1", "portfolio", "holdings", "6"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Security-Policy",
+                  "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Resource-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Origin-Agent-Cluster",
+                  "value": "?1"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "no-referrer"
+                },
+                {
+                  "key": "Strict-Transport-Security",
+                  "value": "max-age=15552000; includeSubDomains"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-DNS-Prefetch-Control",
+                  "value": "off"
+                },
+                {
+                  "key": "X-Download-Options",
+                  "value": "noopen"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "X-Permitted-Cross-Domain-Policies",
+                  "value": "none"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "100"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "96"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 22 Sep 2024 10:03:15 GMT"
+                },
+                {
+                  "key": "X-RateLimit-Reset",
+                  "value": "1727000163"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "280"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"118-4gOMskE9wnRu2Z22SBIUeawpq6Y\""
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"statusText\": \"OK\",\n    \"status\": 200,\n    \"data\": [\n        {\n            \"total_value\": 750,\n            \"portfolio_id\": 6,\n            \"share_id\": 1,\n            \"quantity\": 5,\n            \"average_price\": \"150.00\",\n            \"Share\": {\n                \"symbol\": \"APL\",\n                \"name\": \"Apple Inc.\",\n                \"latest_price\": \"150.00\"\n            },\n            \"Portfolio\": {\n                \"user_id\": 6,\n                \"User\": {\n                    \"username\": \"user6\",\n                    \"email\": \"user6@example.com\"\n                }\n            }\n        }\n    ]\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SharePrice",
+      "item": [
+        {
+          "name": "Update Share Price",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcyNjkyMDYwMCwiZXhwIjoxNzI3MDA3MDAwfQ.AOLrCo9YmLelEeBE0wD7_2XaPhtH4QQJB1KXZXZIbck",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"newPrice\":155\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:7171/api/v1/price/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "7171",
+              "path": ["api", "v1", "price", "1"]
+            }
+          },
+          "response": [
+            {
+              "name": "Update Share Price",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"newPrice\":152\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:7171/api/v1/price/1",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "7171",
+                  "path": ["api", "v1", "price", "1"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Security-Policy",
+                  "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Resource-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Origin-Agent-Cluster",
+                  "value": "?1"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "no-referrer"
+                },
+                {
+                  "key": "Strict-Transport-Security",
+                  "value": "max-age=15552000; includeSubDomains"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-DNS-Prefetch-Control",
+                  "value": "off"
+                },
+                {
+                  "key": "X-Download-Options",
+                  "value": "noopen"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "X-Permitted-Cross-Domain-Policies",
+                  "value": "none"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "100"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "98"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 22 Sep 2024 10:28:39 GMT"
+                },
+                {
+                  "key": "X-RateLimit-Reset",
+                  "value": "1727001763"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "203"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"cb-v/qnQP0Ok2hfFd5pYog10ZkEzi4\""
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"statusText\": \"OK\",\n    \"status\": 200,\n    \"data\": {\n        \"price_id\": 8,\n        \"share_id\": 1,\n        \"price\": \"152.00\",\n        \"recorded_at\": \"2024-09-22T10:28:39.156Z\",\n        \"updatedAt\": \"2024-09-22T10:28:39.157Z\",\n        \"createdAt\": \"2024-09-22T10:28:39.157Z\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get All Shares",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcyNjkyMDYwMCwiZXhwIjoxNzI3MDA3MDAwfQ.AOLrCo9YmLelEeBE0wD7_2XaPhtH4QQJB1KXZXZIbck",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:7171/api/v1/price",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "7171",
+              "path": ["api", "v1", "price"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get All Shares",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:7171/api/v1/price",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "7171",
+                  "path": ["api", "v1", "price"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Security-Policy",
+                  "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Resource-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Origin-Agent-Cluster",
+                  "value": "?1"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "no-referrer"
+                },
+                {
+                  "key": "Strict-Transport-Security",
+                  "value": "max-age=15552000; includeSubDomains"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-DNS-Prefetch-Control",
+                  "value": "off"
+                },
+                {
+                  "key": "X-Download-Options",
+                  "value": "noopen"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "X-Permitted-Cross-Domain-Policies",
+                  "value": "none"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "100"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "90"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 22 Sep 2024 10:04:45 GMT"
+                },
+                {
+                  "key": "X-RateLimit-Reset",
+                  "value": "1727000163"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "823"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"337-PSOQovVKMKdKUtBwfx2bRrcLvQc\""
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"statusText\": \"OK\",\n    \"status\": 200,\n    \"data\": [\n        {\n            \"share_id\": 2,\n            \"symbol\": \"TSL\",\n            \"name\": \"Tesla Inc.\",\n            \"latest_price\": \"700.00\",\n            \"createdAt\": \"2024-09-21T12:08:12.823Z\",\n            \"updatedAt\": \"2024-09-21T12:08:12.823Z\"\n        },\n        {\n            \"share_id\": 3,\n            \"symbol\": \"GGL\",\n            \"name\": \"Alphabet Inc.\",\n            \"latest_price\": \"2800.00\",\n            \"createdAt\": \"2024-09-21T12:08:12.823Z\",\n            \"updatedAt\": \"2024-09-21T12:08:12.823Z\"\n        },\n        {\n            \"share_id\": 4,\n            \"symbol\": \"AZN\",\n            \"name\": \"Amazon.com, Inc.\",\n            \"latest_price\": \"3400.00\",\n            \"createdAt\": \"2024-09-21T12:08:12.823Z\",\n            \"updatedAt\": \"2024-09-21T12:08:12.823Z\"\n        },\n        {\n            \"share_id\": 5,\n            \"symbol\": \"MST\",\n            \"name\": \"Microsoft Corporation\",\n            \"latest_price\": \"290.00\",\n            \"createdAt\": \"2024-09-21T12:08:12.823Z\",\n            \"updatedAt\": \"2024-09-21T12:08:12.823Z\"\n        },\n        {\n            \"share_id\": 1,\n            \"symbol\": \"APL\",\n            \"name\": \"Apple Inc.\",\n            \"latest_price\": \"150.00\",\n            \"createdAt\": \"2024-09-21T12:08:12.823Z\",\n            \"updatedAt\": \"2024-09-22T09:40:35.881Z\"\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Share By Symbol",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcyNjkyMDYwMCwiZXhwIjoxNzI3MDA3MDAwfQ.AOLrCo9YmLelEeBE0wD7_2XaPhtH4QQJB1KXZXZIbck",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:7171/api/v1/price/share/2",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "7171",
+              "path": ["api", "v1", "price", "share", "2"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Share By Symbol",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:7171/api/v1/price/share?shareSymbol=APL",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "7171",
+                  "path": ["api", "v1", "price", "share"],
+                  "query": [
+                    {
+                      "key": "shareSymbol",
+                      "value": "APL"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Security-Policy",
+                  "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Resource-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Origin-Agent-Cluster",
+                  "value": "?1"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "no-referrer"
+                },
+                {
+                  "key": "Strict-Transport-Security",
+                  "value": "max-age=15552000; includeSubDomains"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-DNS-Prefetch-Control",
+                  "value": "off"
+                },
+                {
+                  "key": "X-Download-Options",
+                  "value": "noopen"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "X-Permitted-Cross-Domain-Policies",
+                  "value": "none"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "100"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "98"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 22 Sep 2024 10:26:45 GMT"
+                },
+                {
+                  "key": "X-RateLimit-Reset",
+                  "value": "1727001699"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "191"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"bf-5JXW9JtDl9lXAl2N2uSPc/R1Pno\""
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"statusText\": \"OK\",\n    \"status\": 200,\n    \"data\": {\n        \"share_id\": 1,\n        \"symbol\": \"APL\",\n        \"name\": \"Apple Inc.\",\n        \"latest_price\": \"150.00\",\n        \"createdAt\": \"2024-09-21T12:08:12.823Z\",\n        \"updatedAt\": \"2024-09-22T09:40:35.881Z\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Share Price History",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlhdCI6MTcyNjkyMDYwMCwiZXhwIjoxNzI3MDA3MDAwfQ.AOLrCo9YmLelEeBE0wD7_2XaPhtH4QQJB1KXZXZIbck",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:7171/api/v1/price/share/2",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "7171",
+              "path": ["api", "v1", "price", "share", "2"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Share Price History",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:7171/api/v1/price/history/1",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "7171",
+                  "path": ["api", "v1", "price", "history", "1"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Security-Policy",
+                  "value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+                },
+                {
+                  "key": "Cross-Origin-Opener-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Cross-Origin-Resource-Policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "Origin-Agent-Cluster",
+                  "value": "?1"
+                },
+                {
+                  "key": "Referrer-Policy",
+                  "value": "no-referrer"
+                },
+                {
+                  "key": "Strict-Transport-Security",
+                  "value": "max-age=15552000; includeSubDomains"
+                },
+                {
+                  "key": "X-Content-Type-Options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "X-DNS-Prefetch-Control",
+                  "value": "off"
+                },
+                {
+                  "key": "X-Download-Options",
+                  "value": "noopen"
+                },
+                {
+                  "key": "X-Frame-Options",
+                  "value": "SAMEORIGIN"
+                },
+                {
+                  "key": "X-Permitted-Cross-Domain-Policies",
+                  "value": "none"
+                },
+                {
+                  "key": "X-XSS-Protection",
+                  "value": "0"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "100"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "99"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 22 Sep 2024 10:27:42 GMT"
+                },
+                {
+                  "key": "X-RateLimit-Reset",
+                  "value": "1727001763"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "533"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"215-2XvIOyqPYzBkq2jKwKsySm+tcMI\""
+                },
+                {
+                  "key": "Vary",
+                  "value": "Accept-Encoding"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"statusText\": \"OK\",\n    \"status\": 200,\n    \"data\": [\n        {\n            \"price_id\": 7,\n            \"share_id\": 1,\n            \"price\": \"150.00\",\n            \"recorded_at\": \"2024-09-22T09:40:35.423Z\",\n            \"createdAt\": \"2024-09-22T09:40:35.423Z\",\n            \"updatedAt\": \"2024-09-22T09:40:35.423Z\"\n        },\n        {\n            \"price_id\": 6,\n            \"share_id\": 1,\n            \"price\": \"155.00\",\n            \"recorded_at\": \"2024-09-21T12:14:12.575Z\",\n            \"createdAt\": \"2024-09-21T12:14:12.575Z\",\n            \"updatedAt\": \"2024-09-21T12:14:12.575Z\"\n        },\n        {\n            \"price_id\": 1,\n            \"share_id\": 1,\n            \"price\": \"150.00\",\n            \"recorded_at\": \"2024-09-21T12:08:12.826Z\",\n            \"createdAt\": \"2024-09-21T12:08:12.826Z\",\n            \"updatedAt\": \"2024-09-21T12:08:12.826Z\"\n        }\n    ]\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
