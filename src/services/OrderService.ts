@@ -43,7 +43,7 @@ class OrderService extends BaseService<Order, OrderAttributes, OrderCreationAttr
       order_date: new Date(),
       remaining_quantity: data.quantity, // Add remaining_quantity
     };
-    
+
     return this.orderRepository.create(order);
   }
 
@@ -104,6 +104,30 @@ class OrderService extends BaseService<Order, OrderAttributes, OrderCreationAttr
 
     await order.update({ status: 'COMPLETED' });
     return order;
+  }
+
+  /**
+   * Get all orders for a user.
+   *
+   * @param userId - The ID of the user.
+   * @param page - The page number.
+   * @param limit - The number of trades per page.
+   * @param orderType - The type of order (optional).
+   * @returns A promise that resolves to the paginated list of orders.
+   */
+  public async getOrders(
+    userId: number,
+    page: number,
+    limit: number,
+    orderType?: string,
+    orderStates?: string[],
+  ): Promise<{ orders: Order[]; total: number }> {
+    const getUserPortfolio = await this.portfolioRepository.findPortfolioByUserId(userId);
+    if (!getUserPortfolio) throw new NotFoundError('Portfolio not found');
+
+    const portfolioId = getUserPortfolio.portfolio_id;
+
+    return this.orderRepository.getOrders(portfolioId, page, limit, orderType, orderStates);
   }
 }
 

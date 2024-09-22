@@ -15,5 +15,6 @@ export default (app: Router): void => {
   router.post('/create/:userId', validate(orderLimitSchema), orderController.createOrder);
   router.put('/cancel/:userId/:orderId', validate(cancelLimitOrderSchema), orderController.cancelOrder);
   router.get('/pending/:userId', orderController.getPendingOrders);
+  router.get('/history/:userId', orderController.getOrderHistory);
 
 };
